@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewProductoVenta">
+        <h:panelGrid id="panelViewProductoVenta" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.ProductoVentaLabel_id}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{productoVentaController.selected.id}" title="#{bundle.ProductoVentaTitle_id}"/>
+            <h:outputText value="#{bundle.ProductoVentaLabel_valorUnitario}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{productoVentaController.selected.valorUnitario}" title="#{bundle.ProductoVentaTitle_valorUnitario}"/>
+            <h:outputText value="#{bundle.ProductoVentaLabel_unidades}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{productoVentaController.selected.unidades}" title="#{bundle.ProductoVentaTitle_unidades}"/>
+            <h:outputText value="#{bundle.ProductoVentaLabel_valorTotal}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{productoVentaController.selected.valorTotal}" title="#{bundle.ProductoVentaTitle_valorTotal}"/>
+            <h:outputText value="#{bundle.ProductoVentaLabel_observaciones}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{productoVentaController.selected.observaciones}" title="#{bundle.ProductoVentaTitle_observaciones}"/>
+            <h:outputText value="#{bundle.ProductoVentaLabel_idTipo}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{productoVentaController.selected.idTipo}" title="#{bundle.ProductoVentaTitle_idTipo}"/>
+            <h:outputText value="#{bundle.ProductoVentaLabel_idVenta}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{productoVentaController.selected.idVenta}" title="#{bundle.ProductoVentaTitle_idVenta}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

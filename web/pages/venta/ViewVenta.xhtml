@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewVenta">
+        <h:panelGrid id="panelViewVenta" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.VentaLabel_id}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{ventaController.selected.id}" title="#{bundle.VentaTitle_id}"/>
+            <h:outputText value="#{bundle.VentaLabel_fechaVenta}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{ventaController.selected.fechaVenta}" title="#{bundle.VentaTitle_fechaVenta}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            <h:outputText value="#{bundle.VentaLabel_tipo}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{ventaController.selected.tipo}" title="#{bundle.VentaTitle_tipo}"/>
+            <h:outputText value="#{bundle.VentaLabel_totalVenta}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{ventaController.selected.totalVenta}" title="#{bundle.VentaTitle_totalVenta}"/>
+            <h:outputText value="#{bundle.VentaLabel_totalCosto}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{ventaController.selected.totalCosto}" title="#{bundle.VentaTitle_totalCosto}"/>
+            <h:outputText value="#{bundle.VentaLabel_utilidad}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{ventaController.selected.utilidad}" title="#{bundle.VentaTitle_utilidad}"/>
+            <h:outputText value="#{bundle.VentaLabel_saldo}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{ventaController.selected.saldo}" title="#{bundle.VentaTitle_saldo}"/>
+            <h:outputText value="#{bundle.VentaLabel_fechaSaldo}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{ventaController.selected.fechaSaldo}" title="#{bundle.VentaTitle_fechaSaldo}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            <h:outputText value="#{bundle.VentaLabel_observaciones}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{ventaController.selected.observaciones}" title="#{bundle.VentaTitle_observaciones}"/>
+            <h:outputText value="#{bundle.VentaLabel_idComprador}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{ventaController.selected.idComprador}" title="#{bundle.VentaTitle_idComprador}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

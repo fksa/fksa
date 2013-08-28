@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewSas">
+        <h:panelGrid id="panelViewSas" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.SasLabel_nombre}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.nombre}" title="#{bundle.SasTitle_nombre}"/>
+            <h:outputText value="#{bundle.SasLabel_nit}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.nit}" title="#{bundle.SasTitle_nit}"/>
+            <h:outputText value="#{bundle.SasLabel_domicilio}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.domicilio}" title="#{bundle.SasTitle_domicilio}"/>
+            <h:outputText value="#{bundle.SasLabel_direccion}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.direccion}" title="#{bundle.SasTitle_direccion}"/>
+            <h:outputText value="#{bundle.SasLabel_documentoNumero}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.documentoNumero}" title="#{bundle.SasTitle_documentoNumero}"/>
+            <h:outputText value="#{bundle.SasLabel_fechaConstitucion}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.fechaConstitucion}" title="#{bundle.SasTitle_fechaConstitucion}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            <h:outputText value="#{bundle.SasLabel_fechaInscripcion}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.fechaInscripcion}" title="#{bundle.SasTitle_fechaInscripcion}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            <h:outputText value="#{bundle.SasLabel_numeroInscripcion}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.numeroInscripcion}" title="#{bundle.SasTitle_numeroInscripcion}"/>
+            <h:outputText value="#{bundle.SasLabel_libroInscripcion}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.libroInscripcion}" title="#{bundle.SasTitle_libroInscripcion}"/>
+            <h:outputText value="#{bundle.SasLabel_matricula}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.matricula}" title="#{bundle.SasTitle_matricula}"/>
+            <h:outputText value="#{bundle.SasLabel_nombreRepresentante}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.nombreRepresentante}" title="#{bundle.SasTitle_nombreRepresentante}"/>
+            <h:outputText value="#{bundle.SasLabel_identificacionRepresentante}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.identificacionRepresentante}" title="#{bundle.SasTitle_identificacionRepresentante}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.SasLabel_capitalSuscrito}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.capitalSuscrito}" title="#{bundle.SasTitle_capitalSuscrito}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.SasLabel_capitalPagado}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.capitalPagado}" title="#{bundle.SasTitle_capitalPagado}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.SasLabel_capitalAutorizado}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.capitalAutorizado}" title="#{bundle.SasTitle_capitalAutorizado}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.SasLabel_capitalSuscritoSa}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.capitalSuscritoSa}" title="#{bundle.SasTitle_capitalSuscritoSa}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.SasLabel_capitalPagadoSa}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.capitalPagadoSa}" title="#{bundle.SasTitle_capitalPagadoSa}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.SasLabel_totalEnTitulos}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sasController.selected.totalEnTitulos}" title="#{bundle.SasTitle_totalEnTitulos}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+        </h:panelGrid>
+    </h:form>
+</html>

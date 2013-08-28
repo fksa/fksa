@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewPerfilTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form prependId="false">
+                <p:commandButton action="#{perfilController.prepareList}" value="#{bundle.PerfilShowAllLink}"
+                                 icon="ui-icon-arrowreturnthick-1-w" title="#{bundle.PerfilShowAllLink}" ajax="false" immediate="true">
+                </p:commandButton>
+                <br/>
+                <br/>
+                <p:panel header="#{perfilController.selected}">
+                    <br/>
+                    <p:commandButton icon="ui-icon-plusthick" style="margin-right:0px;" ajax="false" disabled="#{LoginController.validarPermisos}"
+                                     action="#{perfilController.prepareCreate}" title="#{bundle.PerfilCreateLink}" />
+                    <p:commandButton icon="ui-icon-pencil" style="margin-right:0px;" ajax="false" disabled="#{LoginController.validarPermisos}"
+                                     action="#{perfilController.prepareEditForView}" title="#{bundle.PerfilEditLink}" />
+                    <p:commandButton icon="ui-icon-closethick" style="margin-right:0px;" ajax="false" disabled="#{LoginController.validarPermisos}"
+                                     action="#{perfilController.destroyAndView}" title="#{bundle.PerfilDestroyLink}" />
+                    <br/>
+                    <br/>
+                    <h:panelGrid columns="3">
+                        <h:outputText value="#{bundle.PerfilLabel_nombre}"/>
+                        <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+                        <h:outputText value="#{perfilController.selected.nombre}" title="#{bundle.PerfilTitle_nombre}"/>
+                        <h:outputText value="#{bundle.PerfilLabel_descripcion}"/>
+                        <h:outputText value="&nbsp;"/>
+                        <h:outputText value="#{perfilController.selected.descripcion}" title="#{bundle.PerfilTitle_descripcion}"/>
+                    </h:panelGrid>
+                    <br/>
+                    <br/>
+                    <p:dataTable  id="grupos" var="grupo" value="#{perfilController.selected.gruposPerfilList}" paginator="true" rows="10" >  
+                        <f:facet name="header">#{bundle.ListGrupoTitle}</f:facet>  
+                        <p:column headerText="#{bundle.GrupoTitle_nombre}">
+                            <h:outputText value="#{grupo.grupo.nombre}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.GrupoTitle_descripcion}">
+                            <h:outputText value="#{grupo.grupo.descripcion}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <br/>
+                    <br/>
+                    <p:dataTable  id="usuarios" var="usuario" value="#{perfilController.selected.perfilesUsuarioList}" paginator="true" rows="10" >  
+                        <f:facet name="header">#{bundle.ListUsuarioTitle}</f:facet>  
+                        <p:column headerText="#{bundle.UsuarioTitle_usuario}">
+                            <h:outputText value="#{usuario.usuario.usuario}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.UsuarioTitle_nombre}">
+                            <h:outputText value="#{usuario.usuario.nombre}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

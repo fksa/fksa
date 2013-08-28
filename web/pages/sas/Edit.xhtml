@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditSas">
+        <p:panelGrid columns="2" id="panelEditSas">
+            <h:outputLabel value="#{bundle.SasLabel_id}" for="id" />
+            <h:inputText id="id" value="#{sasController.selected.id}" title="#{bundle.SasTitle_id}" required="true" requiredMessage="#{bundle.SasRequiredMessage_id}"/>
+            <h:outputLabel value="#{bundle.SasLabel_nombre}" for="nombre" />
+            <h:inputText id="nombre" value="#{sasController.selected.nombre}" title="#{bundle.SasTitle_nombre}" required="true" requiredMessage="#{bundle.SasRequiredMessage_nombre}"/>
+            <h:outputLabel value="#{bundle.SasLabel_nit}" for="nit" />
+            <h:inputText id="nit" value="#{sasController.selected.nit}" title="#{bundle.SasTitle_nit}" required="true" requiredMessage="#{bundle.SasRequiredMessage_nit}"/>
+            <h:outputLabel value="#{bundle.SasLabel_domicilio}" for="domicilio" />
+            <h:inputText id="domicilio" value="#{sasController.selected.domicilio}" title="#{bundle.SasTitle_domicilio}" required="true" requiredMessage="#{bundle.SasRequiredMessage_domicilio}"/>
+            <h:outputLabel value="#{bundle.SasLabel_direccion}" for="direccion" />
+            <h:inputText id="direccion" value="#{sasController.selected.direccion}" title="#{bundle.SasTitle_direccion}" required="true" requiredMessage="#{bundle.SasRequiredMessage_direccion}"/>
+            <h:outputLabel value="#{bundle.SasLabel_documentoNumero}" for="documentoNumero" />
+            <h:inputText id="documentoNumero" value="#{sasController.selected.documentoNumero}" title="#{bundle.SasTitle_documentoNumero}" required="true" requiredMessage="#{bundle.SasRequiredMessage_documentoNumero}"/>
+            <h:outputLabel value="#{bundle.SasLabel_fechaConstitucion}" for="fechaConstitucion" />
+            <h:inputText id="fechaConstitucion" value="#{sasController.selected.fechaConstitucion}" title="#{bundle.SasTitle_fechaConstitucion}" required="true" requiredMessage="#{bundle.SasRequiredMessage_fechaConstitucion}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:inputText>
+            <h:outputLabel value="#{bundle.SasLabel_fechaInscripcion}" for="fechaInscripcion" />
+            <h:inputText id="fechaInscripcion" value="#{sasController.selected.fechaInscripcion}" title="#{bundle.SasTitle_fechaInscripcion}" required="true" requiredMessage="#{bundle.SasRequiredMessage_fechaInscripcion}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:inputText>
+            <h:outputLabel value="#{bundle.SasLabel_numeroInscripcion}" for="numeroInscripcion" />
+            <h:inputText id="numeroInscripcion" value="#{sasController.selected.numeroInscripcion}" title="#{bundle.SasTitle_numeroInscripcion}" required="true" requiredMessage="#{bundle.SasRequiredMessage_numeroInscripcion}"/>
+            <h:outputLabel value="#{bundle.SasLabel_libroInscripcion}" for="libroInscripcion" />
+            <h:inputText id="libroInscripcion" value="#{sasController.selected.libroInscripcion}" title="#{bundle.SasTitle_libroInscripcion}" required="true" requiredMessage="#{bundle.SasRequiredMessage_libroInscripcion}"/>
+            <h:outputLabel value="#{bundle.SasLabel_matricula}" for="matricula" />
+            <h:inputText id="matricula" value="#{sasController.selected.matricula}" title="#{bundle.SasTitle_matricula}" required="true" requiredMessage="#{bundle.SasRequiredMessage_matricula}"/>
+            <h:outputLabel value="#{bundle.SasLabel_nombreRepresentante}" for="nombreRepresentante" />
+            <h:inputText id="nombreRepresentante" value="#{sasController.selected.nombreRepresentante}" title="#{bundle.SasTitle_nombreRepresentante}" required="true" requiredMessage="#{bundle.SasRequiredMessage_nombreRepresentante}"/>
+            <h:outputLabel value="#{bundle.SasLabel_identificacionRepresentante}" for="identificacionRepresentante" />
+            <h:inputText id="identificacionRepresentante" value="#{sasController.selected.identificacionRepresentante}" title="#{bundle.SasTitle_identificacionRepresentante}" required="true" requiredMessage="#{bundle.SasRequiredMessage_identificacionRepresentante}"/>
+            <h:outputLabel value="#{bundle.SasLabel_capitalSuscrito}" for="capitalSuscrito" />
+            <h:inputText id="capitalSuscrito" value="#{sasController.selected.capitalSuscrito}" title="#{bundle.SasTitle_capitalSuscrito}" required="true" requiredMessage="#{bundle.SasRequiredMessage_capitalSuscrito}"/>
+            <h:outputLabel value="#{bundle.SasLabel_capitalPagado}" for="capitalPagado" />
+            <h:inputText id="capitalPagado" value="#{sasController.selected.capitalPagado}" title="#{bundle.SasTitle_capitalPagado}" required="true" requiredMessage="#{bundle.SasRequiredMessage_capitalPagado}"/>
+            <h:outputLabel value="#{bundle.SasLabel_capitalAutorizado}" for="capitalAutorizado" />
+            <h:inputText id="capitalAutorizado" value="#{sasController.selected.capitalAutorizado}" title="#{bundle.SasTitle_capitalAutorizado}" required="true" requiredMessage="#{bundle.SasRequiredMessage_capitalAutorizado}"/>
+            <h:outputLabel value="#{bundle.SasLabel_capitalSuscritoSa}" for="capitalSuscritoSa" />
+            <h:inputText id="capitalSuscritoSa" value="#{sasController.selected.capitalSuscritoSa}" title="#{bundle.SasTitle_capitalSuscritoSa}" required="true" requiredMessage="#{bundle.SasRequiredMessage_capitalSuscritoSa}"/>
+            <h:outputLabel value="#{bundle.SasLabel_capitalPagadoSa}" for="capitalPagadoSa" />
+            <h:inputText id="capitalPagadoSa" value="#{sasController.selected.capitalPagadoSa}" title="#{bundle.SasTitle_capitalPagadoSa}" required="true" requiredMessage="#{bundle.SasRequiredMessage_capitalPagadoSa}"/>
+            <h:outputLabel value="#{bundle.SasLabel_totalEnTitulos}" for="totalEnTitulos" />
+            <h:inputText id="totalEnTitulos" value="#{sasController.selected.totalEnTitulos}" title="#{bundle.SasTitle_totalEnTitulos}" required="true" requiredMessage="#{bundle.SasRequiredMessage_totalEnTitulos}"/>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonSas" icon="ui-icon-disk" oncomplete="dialogEditSas.hide()" update=":formListSas:listaSas :formListSas:gro"
+                             actionListener="#{sasController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

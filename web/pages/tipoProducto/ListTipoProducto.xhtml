@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListTipoProducto" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <div style="text-align: right">
+                <p:commandButton id="addButtonTipoProducto" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{tipoProductoController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":formEditTipoProducto:panelEditTipoProducto"
+                                 oncomplete="dialogEditTipoProducto.show()" process="addButtonTipoProducto"/>    
+            </div>
+            <p:contextMenu for="listaTipoProducto">  
+                <p:menuitem value="#{bundle.EditLink}" update=":formEditTipoProducto:panelEditTipoProducto" icon="ui-icon-pencil"
+                            oncomplete="dialogEditTipoProducto.show()" disabled="#{LoginController.validarPermisos}"/> 
+                <p:menuitem value="#{bundle.DestroyLink}" update=":formListTipoProducto:panelConfirmTipoProducto" icon="ui-icon-closethick"
+                            oncomplete="confirmationTipoProducto.show()" disabled="#{LoginController.validarPermisos}"/> 
+            </p:contextMenu>
+            <p:dataTable value="#{tipoProductoController.items}" var="itemTipoProducto" id="listaTipoProducto" 
+                         selection="#{tipoProductoController.selected}" selectionMode="single" paginator="true" rows="20" >
+                <p:column headerText="#{bundle.TipoProductoTitle_id}">
+                    <h:outputText value="#{itemTipoProducto.id}"/>
+                </p:column>
+                <p:column headerText="#{bundle.TipoProductoTitle_nombre}">
+                    <h:outputText value="#{itemTipoProducto.nombre}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{tipoProductoController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationTipoProducto" id="panelConfirmTipoProducto">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaTipoProducto" oncomplete="confirmationTipoProducto.hide()"
+                                 actionListener="#{tipoProductoController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationTipoProducto.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditTipoProducto" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="EditTipoProducto.xhtml"></ui:include>
+    </p:dialog>
+</html>

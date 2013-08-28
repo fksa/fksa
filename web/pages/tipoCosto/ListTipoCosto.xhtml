@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListTipoCosto" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <div style="text-align: right">
+                <p:commandButton id="addButtonTipoCosto" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{tipoCostoController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":formEditTipoCosto:panelEditTipoCosto"
+                                 oncomplete="dialogEditTipoCosto.show()" process="addButtonTipoCosto"/>    
+            </div>
+            <p:contextMenu for="listaTipoCosto">  
+                <p:menuitem value="#{bundle.EditLink}" update=":formEditTipoCosto:panelEditTipoCosto" icon="ui-icon-pencil"
+                            oncomplete="dialogEditTipoCosto.show()" disabled="#{LoginController.validarPermisos}"/> 
+                <p:menuitem value="#{bundle.DestroyLink}" update=":formListTipoCosto:panelConfirmTipoCosto" icon="ui-icon-closethick"
+                            oncomplete="confirmationTipoCosto.show()" disabled="#{LoginController.validarPermisos}"/> 
+            </p:contextMenu>
+            <p:dataTable value="#{tipoCostoController.items}" var="itemTipoCosto" id="listaTipoCosto" 
+                         selection="#{tipoCostoController.selected}" selectionMode="single" paginator="true" rows="20" >
+                <p:column headerText="#{bundle.TipoCostoTitle_id}">
+                    <h:outputText value="#{itemTipoCosto.id}"/>
+                </p:column>
+                <p:column headerText="#{bundle.TipoCostoTitle_nombre}">
+                    <h:outputText value="#{itemTipoCosto.nombre}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{tipoCostoController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationTipoCosto" id="panelConfirmTipoCosto">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaTipoCosto" oncomplete="confirmationTipoCosto.hide()"
+                                 actionListener="#{tipoCostoController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationTipoCosto.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditTipoCosto" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="EditTipoCosto.xhtml"></ui:include>
+    </p:dialog>
+</html>

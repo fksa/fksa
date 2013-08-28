@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListSas" styleClass="jsfcrud_list_form">
+        <p:panel header="#{bundle.ListTitle}">
+            <p:dataTable value="#{sasController.items}" var="itemSas" id="listaSas"
+                    selection="#{sasController.selected}" selectionMode="single">
+                <p:ajax event="rowSelect" update=":panelViewSas" oncomplete="dialogViewSas.show()"/>  
+                <p:column headerText="#{bundle.SasTitle_nombre}" 
+                          sortBy="#{itemSas.nombre}">
+                    <h:outputText value="#{itemSas.nombre}"/>
+                </p:column>
+                <p:column headerText="#{bundle.SasTitle_capitalSuscritoSa}" style="text-align: right"
+                          sortBy="#{itemSas.capitalSuscritoSa}">
+                    <h:outputText value="#{itemSas.capitalSuscritoSa}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <f:facet name="footer">
+                        <h:outputText value="#{sasController.totalSuscritoSA}" >
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                </p:column>
+                <p:column headerText="#{bundle.SasTitle_capitalPagadoSa}" style="text-align: right"
+                          sortBy="#{itemSas.capitalPagadoSa}">
+                    <h:outputText value="#{itemSas.capitalPagadoSa}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <f:facet name="footer">
+                        <h:outputText value="#{sasController.totalPagadoSA}" >
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                </p:column>
+                <p:column headerText="Capital S.A.S." style="text-align: right"
+                          sortBy="#{itemSas.capitalSuscrito}">
+                    <h:outputText value="#{itemSas.capitalSuscrito}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <f:facet name="footer">
+                        <h:outputText value="#{sasController.totalCapitalSAS}" >
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                </p:column>
+                <p:column headerText="#{bundle.SasTitle_totalEnTitulos}" style="text-align: right"
+                          sortBy="#{itemSas.totalEnTitulos}">
+                    <h:outputText value="#{itemSas.totalEnTitulos}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <f:facet name="footer">
+                        <h:outputText value="#{sasController.totalTitulos}" >
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                </p:column>
+                <p:column headerText="%" width="25">
+                    <h:outputText value="#{100 * (itemSas.totalEnTitulos / itemSas.capitalSuscrito)}">
+                        <f:convertNumber maxFractionDigits="2"/>
+                    </h:outputText>
+                    <f:facet name="footer">
+                        <h:outputText value="#{100 * (sasController.totalTitulos / sasController.totalCapitalSAS)}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </h:outputText>
+                    </f:facet>  
+                </p:column>
+                <p:column headerText="Disponible" style="text-align: right"
+                          sortBy="#{itemSas.disponible}">
+                    <h:outputText value="#{itemSas.disponible}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <f:facet name="footer">
+                        <h:outputText value="#{sasController.totalCapitalSAS - sasController.totalTitulos}" >
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                </p:column>
+                <p:column headerText="%" width="25">
+                    <h:outputText value="#{100 * (itemSas.disponible / itemSas.capitalSuscrito)}">
+                        <f:convertNumber minIntegerDigits="2" maxFractionDigits="2"/>
+                    </h:outputText>
+                    <f:facet name="footer">
+                        <h:outputText value="#{100 * ((sasController.totalCapitalSAS - sasController.totalTitulos) / sasController.totalCapitalSAS)}" >
+                            <f:convertNumber maxFractionDigits="2"/>
+                        </h:outputText>
+                    </f:facet>  
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewSas" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="View.xhtml"></ui:include>
+    </p:dialog>  
+</html>

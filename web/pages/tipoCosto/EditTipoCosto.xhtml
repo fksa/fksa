@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditTipoCosto">
+        <p:panelGrid columns="2" id="panelEditTipoCosto">
+            <h:outputLabel value="#{bundle.TipoCostoLabel_nombre}" for="nombre" />
+            <h:inputText id="nombre" value="#{tipoCostoController.selected.nombre}" title="#{bundle.TipoCostoTitle_nombre}" required="true" requiredMessage="#{bundle.TipoCostoRequiredMessage_nombre}"/>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonTipoCosto" icon="ui-icon-disk" oncomplete="dialogEditTipoCosto.hide()" update=":formListTipoCosto:listaTipoCosto :formListTipoCosto:gro"
+                             actionListener="#{tipoCostoController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

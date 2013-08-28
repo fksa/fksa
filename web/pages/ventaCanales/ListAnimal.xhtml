@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListAnimal" styleClass="jsfcrud_list_form">
+        <p:dataTable value="#{ventaCanalesController.selected.animalList}" var="itemAnimal" id="listaAnimal" paginator="true" rows="10" editable="true" >
+            <p:ajax event="rowEdit" listener="#{ventaCanalesController.saveAnimal}"
+                    update=":formEditVenta:mensaje :formListVenta:listaVenta :formEditVenta:tabVenta:panelEditVenta2 :formEditVenta:tabVenta:formListAnimal:listaAnimal" />  
+            <p:ajax event="rowEditCancel" update=":formEditVenta:mensaje :formEditVenta" />  
+            <p:column headerText="#{bundle.AnimalTitle_numeroFksa}">
+                <h:outputText value="#{itemAnimal.numeroFksa}"/>
+            </p:column>
+            <!--p:column headerText="#{bundle.AnimalTitle_tipo}">
+                <h:outputText value="#{itemAnimal.idTipo.nombre}"/>
+            </p:column-->
+            <p:column headerText="#{bundle.AnimalTitle_pesoCompra}">
+                <h:outputText value="#{itemAnimal.pesoCompra}">
+                    <f:convertNumber integerOnly="true"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="#{bundle.SacrificioTitle_pesoSacrificio}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.sacrificio.pesoSacrificio}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.sacrificio.pesoSacrificio}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.SacrificioTitle_pesoCanalCaliente}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.sacrificio.pesoCanalCaliente}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.sacrificio.pesoCanalCaliente}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.SacrificioTitle_pesoVisceras}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.sacrificio.pesoVisceras}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.sacrificio.pesoVisceras}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.SacrificioTitle_pesoPiel}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.sacrificio.pesoPiel}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.sacrificio.pesoPiel}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.SacrificioTitle_pesoSebo}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.sacrificio.pesoSebo}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.sacrificio.pesoSebo}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.SacrificioTitle_pesoCanalFrio}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.sacrificio.pesoCanalFrio}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.sacrificio.pesoCanalFrio}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.SacrificioTitle_pesoCanalEntrega}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.sacrificio.pesoCanalEntrega}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.sacrificio.pesoCanalEntrega}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.SacrificioTitle_observaciones}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.sacrificio.observaciones}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.sacrificio.observaciones}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column style="width:6%">  
+                <p:rowEditor/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</html>

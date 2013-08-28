@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListAnimal" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <br/>
+            <div style="text-align: right">
+                <p:commandButton id="addButtonAnimal" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{animalController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":formEditAnimal:panelEditAnimal"
+                                 oncomplete="dialogEditAnimal.show()" process="addButtonAnimal"/>    
+            </div>
+            <h:outputText escape="false" value="#{bundle.Empty}" rendered="#{animalController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{animalController.items.rowCount > 0}">
+                <p:contextMenu for="listaAnimal">  
+                    <p:menuitem value="#{bundle.ViewLink}" update=":formViewAnimal:panelViewAnimal" icon="ui-icon-zoomin"
+                                oncomplete="dialogViewAnimal.show()"/> 
+                    <p:menuitem value="#{bundle.EditLink}" update=":formEditAnimal:panelEditAnimal" icon="ui-icon-pencil"
+                                oncomplete="dialogEditAnimal.show()" disabled="#{LoginController.validarPermisos}"/> 
+                    <p:menuitem value="#{bundle.DestroyLink}" update=":formListAnimal:panelConfirmAnimal" icon="ui-icon-closethick"
+                                oncomplete="confirmationAnimal.show()" disabled="#{LoginController.validarPermisos}"/> 
+                </p:contextMenu>
+                <p:dataTable value="#{animalController.items}" var="itemAnimal" id="listaAnimal" rowKey="#{itemAnimal.id}" 
+                             selection="#{animalController.selected}" selectionMode="single" paginator="true" rows="20" >
+                    <p:column headerText="#{bundle.AnimalTitle_id}" filterBy="#{itemAnimal.id}"
+                              sortBy="#{itemAnimal.id}" id="idFilter">
+                        <h:outputText value="#{itemAnimal.id}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_numeroFksa}" filterBy="#{itemAnimal.numeroFksa}"
+                              sortBy="#{itemAnimal.numeroFksa}" id="numeroFksaFilter">
+                        <h:outputText value="#{itemAnimal.numeroFksa}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_pesoCompra}" filterBy="#{itemAnimal.pesoCompra}"
+                              sortBy="#{itemAnimal.pesoCompra}" id="pesoCompraFilter">
+                        <h:outputText value="#{itemAnimal.pesoCompra}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_valorKgCompra}" filterBy="#{itemAnimal.valorKgCompra}"
+                              sortBy="#{itemAnimal.valorKgCompra}" id="valorKgCompraFilter">
+                        <h:outputText value="#{itemAnimal.valorKgCompra}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_valorTotalCompra}" filterBy="#{itemAnimal.valorTotalCompra}"
+                              sortBy="#{itemAnimal.valorTotalCompra}" id="valorTotalCompraFilter">
+                        <h:outputText value="#{itemAnimal.valorTotalCompra}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_pesoVenta}" filterBy="#{itemAnimal.pesoVenta}"
+                              sortBy="#{itemAnimal.pesoVenta}" id="pesoVentaFilter">
+                        <h:outputText value="#{itemAnimal.pesoVenta}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_valorKgVenta}" filterBy="#{itemAnimal.valorKgVenta}"
+                              sortBy="#{itemAnimal.valorKgVenta}" id="valorKgVentaFilter">
+                        <h:outputText value="#{itemAnimal.valorKgVenta}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_valorTotalVenta}" filterBy="#{itemAnimal.valorTotalVenta}"
+                              sortBy="#{itemAnimal.valorTotalVenta}" id="valorTotalVentaFilter">
+                        <h:outputText value="#{itemAnimal.valorTotalVenta}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_sacrificio}" filterBy="#{itemAnimal.sacrificio}"
+                              sortBy="#{itemAnimal.sacrificio}" id="sacrificioFilter">
+                        <h:outputText value="#{itemAnimal.sacrificio}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_idVenta}" filterBy="#{itemAnimal.idVenta}"
+                              sortBy="#{itemAnimal.idVenta}" id="idVentaFilter">
+                        <h:outputText value="#{itemAnimal.idVenta}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_idCompra}" filterBy="#{itemAnimal.idCompra}"
+                              sortBy="#{itemAnimal.idCompra}" id="idCompraFilter">
+                        <h:outputText value="#{itemAnimal.idCompra}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_tipo}" filterBy="#{itemAnimal.tipo}"
+                              sortBy="#{itemAnimal.tipo}" id="tipoFilter">
+                        <h:outputText value="#{itemAnimal.tipo}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{animalController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationAnimal" id="panelConfirmAnimal">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaAnimal" oncomplete="confirmationAnimal.hide()"
+                                 actionListener="#{animalController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationAnimal.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewAnimal" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="ViewAnimal.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditAnimal" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="EditAnimal.xhtml"></ui:include>
+    </p:dialog>
+</html>

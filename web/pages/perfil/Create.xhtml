@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreatePerfilTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:panel header="#{bundle.CreatePerfilTitle}">
+                <h:form prependId="false">
+                    <p:commandButton value="#{bundle.PerfilShowAllLink}" action="#{perfilController.prepareList}"
+                                     image="ui-icon ui-icon-arrowreturnthick-1-w" title="#{bundle.PerfilShowAllLink}" ajax="false" immediate="true">
+                    </p:commandButton>
+                    <br/>
+                    <br/>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.PerfilLabel_nombre}" for="nombre" />
+                        <h:inputText id="nombre" value="#{perfilController.selected.nombre}" title="#{bundle.PerfilTitle_nombre}"
+                                        required="true" requiredMessage="#{bundle.PerfilRequiredMessage_nombre}"/>
+                        <h:outputLabel value="#{bundle.PerfilLabel_descripcion}" for="descripcion" />
+                        <h:inputText id="descripcion" value="#{perfilController.selected.descripcion}" title="#{bundle.PerfilTitle_descripcion}"
+                                        required="true" requiredMessage="#{bundle.PerfilRequiredMessage_descripcion}"/>
+                    </h:panelGrid>
+                    <br />
+                    <p:commandButton value="#{bundle.CreatePerfilSaveLink}" action="#{perfilController.create}"
+                                     image="ui-icon ui-icon-disk" title="#{bundle.CreatePerfilSaveLink}" ajax="false">
+                    </p:commandButton>
+                </h:form>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+
+</html>

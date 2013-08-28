@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditPagoAcciones">
+        <p:panelGrid columns="2" id="panelEditPagoAcciones">
+            <h:outputLabel value="#{bundle.PagoAccionesLabel_id}" for="id" />
+            <h:inputText id="id" value="#{pagoAccionesController.selected.id}" title="#{bundle.PagoAccionesTitle_id}" required="true" requiredMessage="#{bundle.PagoAccionesRequiredMessage_id}"/>
+            <h:outputLabel value="#{bundle.PagoAccionesLabel_fecha}" for="fecha" />
+            <h:inputText id="fecha" value="#{pagoAccionesController.selected.fecha}" title="#{bundle.PagoAccionesTitle_fecha}" required="true" requiredMessage="#{bundle.PagoAccionesRequiredMessage_fecha}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:inputText>
+            <h:outputLabel value="#{bundle.PagoAccionesLabel_numero}" for="numero" />
+            <h:inputText id="numero" value="#{pagoAccionesController.selected.numero}" title="#{bundle.PagoAccionesTitle_numero}" />
+            <h:outputLabel value="#{bundle.PagoAccionesLabel_valor}" for="valor" />
+            <h:inputText id="valor" value="#{pagoAccionesController.selected.valor}" title="#{bundle.PagoAccionesTitle_valor}" required="true" requiredMessage="#{bundle.PagoAccionesRequiredMessage_valor}"/>
+            <h:outputLabel value="#{bundle.PagoAccionesLabel_comisionBancaria}" for="comisionBancaria" />
+            <h:inputText id="comisionBancaria" value="#{pagoAccionesController.selected.comisionBancaria}" title="#{bundle.PagoAccionesTitle_comisionBancaria}" required="true" requiredMessage="#{bundle.PagoAccionesRequiredMessage_comisionBancaria}"/>
+            <h:outputLabel value="#{bundle.PagoAccionesLabel_valorNeto}" for="valorNeto" />
+            <h:inputText id="valorNeto" value="#{pagoAccionesController.selected.valorNeto}" title="#{bundle.PagoAccionesTitle_valorNeto}" required="true" requiredMessage="#{bundle.PagoAccionesRequiredMessage_valorNeto}"/>
+            <h:outputLabel value="#{bundle.PagoAccionesLabel_observaciones}" for="observaciones" />
+            <h:inputText id="observaciones" value="#{pagoAccionesController.selected.observaciones}" title="#{bundle.PagoAccionesTitle_observaciones}" />
+            <h:outputLabel value="#{bundle.PagoAccionesLabel_idAccionista}" for="idAccionista" />
+            <h:selectOneMenu id="idAccionista" value="#{pagoAccionesController.selected.idAccionista}" title="#{bundle.PagoAccionesTitle_idAccionista}" required="true" requiredMessage="#{bundle.PagoAccionesRequiredMessage_idAccionista}">
+                <f:selectItems value="#{accionistaController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonPagoAcciones" icon="ui-icon-disk" oncomplete="dialogEditPagoAcciones.hide()" update=":formEditAccionista:tabAccionista:formListPagoAcciones:listaPagoAcciones"
+                             actionListener="#{pagoAccionesController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

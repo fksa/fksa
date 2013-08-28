@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/templateLogin.xhtml">
+        <ui:define name="body">
+            <p:panel header="Login">
+                <h:form>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="username" value="Usuario: *" />
+                        <h:inputText value="#{loginController.username}"
+                                     id="username" required="true" label="username" />
+
+                        <h:outputLabel for="password" value="Clave: * " />
+                        <h:inputSecret value="#{loginController.password}"
+                                       id="password" required="true" label="password" />
+
+                        <f:facet name="footer">
+                            <p:commandButton value="Login" action="#{loginController.checkValidUser}" ajax="false" async="false"/>
+                        </f:facet>
+                    </h:panelGrid>
+                </h:form>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+
+</html>

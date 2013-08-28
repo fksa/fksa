@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <div style="text-align: right">
+        <p:commandButton id="addButtonAddAnimal" icon="ui-icon-plusthick"
+                    disabled="#{ventaController.selected.id == null or LoginController.validarPermisos}"
+                    update=":formEditVenta:mensaje :formListVenta:listaVenta
+                            :formEditVenta:tabVenta:panelEditVenta2
+                            :formEditVenta:tabVenta:nroAnimales
+                            :formEditVenta:tabVenta:vlorAnimales
+                            :formEditVenta:tabVenta:formListAnimal:tabAnimal:listaAnimal  
+                            :formEditVenta:tabVenta:formListAnimal:tabAnimal:listaAddAnimal"  
+                    actionListener="#{ventaController.addAnimales}"/>    
+    </div>
+    <p:dataTable value="#{ventaController.itemsAnimal}" var="itemAnimal" id="listaAddAnimal" rowKey="#{itemAnimal.id}" 
+                 selection="#{ventaController.animalesArray}" paginator="true" rows="10">
+        <p:column selectionMode="multiple" style="width:2%" />  
+        <p:column headerText="#{bundle.CompraTitle_idVendedor}"
+                  sortBy="#{itemAnimal.idCompra.idVendedor.nombre}">
+            <h:outputText value="#{itemAnimal.idCompra.idVendedor.nombre}"/>
+        </p:column>
+        <p:column headerText="#{bundle.CompraTitle_fechaCompra}" 
+                  sortBy="#{itemAnimal.idCompra.fechaCompra}" >
+            <h:outputText value="#{itemAnimal.idCompra.fechaCompra}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+        </p:column>
+        <p:column headerText="#{bundle.AnimalTitle_numeroFksa}"
+                  sortBy="#{itemAnimal.numeroFksa}">
+            <h:outputText value="#{itemAnimal.numeroFksa}"/>
+        </p:column>
+        <p:column headerText="#{bundle.AnimalTitle_pesoCompra}"
+                  sortBy="#{itemAnimal.pesoCompra}">
+            <h:outputText value="#{itemAnimal.pesoCompra}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+        </p:column>
+        <p:column headerText="#{bundle.AnimalTitle_valorKgCompra}"
+                  sortBy="#{itemAnimal.valorKgCompra}">
+            <h:outputText value="#{itemAnimal.valorKgCompra}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+        </p:column>
+        <p:column headerText="#{bundle.AnimalTitle_valorTotalCompra}"
+                  sortBy="#{itemAnimal.valorTotalCompra}">
+            <h:outputText value="#{itemAnimal.valorTotalCompra}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+        </p:column>
+    </p:dataTable>
+</html>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewAnimal">
+        <h:panelGrid id="panelViewAnimal" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.AnimalLabel_id}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.id}" title="#{bundle.AnimalTitle_id}"/>
+            <h:outputText value="#{bundle.AnimalLabel_numeroFksa}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.numeroFksa}" title="#{bundle.AnimalTitle_numeroFksa}"/>
+            <h:outputText value="#{bundle.AnimalLabel_pesoCompra}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.pesoCompra}" title="#{bundle.AnimalTitle_pesoCompra}"/>
+            <h:outputText value="#{bundle.AnimalLabel_valorKgCompra}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.valorKgCompra}" title="#{bundle.AnimalTitle_valorKgCompra}"/>
+            <h:outputText value="#{bundle.AnimalLabel_valorTotalCompra}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.valorTotalCompra}" title="#{bundle.AnimalTitle_valorTotalCompra}"/>
+            <h:outputText value="#{bundle.AnimalLabel_pesoVenta}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.pesoVenta}" title="#{bundle.AnimalTitle_pesoVenta}"/>
+            <h:outputText value="#{bundle.AnimalLabel_valorKgVenta}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.valorKgVenta}" title="#{bundle.AnimalTitle_valorKgVenta}"/>
+            <h:outputText value="#{bundle.AnimalLabel_valorTotalVenta}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.valorTotalVenta}" title="#{bundle.AnimalTitle_valorTotalVenta}"/>
+            <h:outputText value="#{bundle.AnimalLabel_sacrificio}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.sacrificio}" title="#{bundle.AnimalTitle_sacrificio}"/>
+            <h:outputText value="#{bundle.AnimalLabel_idVenta}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.idVenta}" title="#{bundle.AnimalTitle_idVenta}"/>
+            <h:outputText value="#{bundle.AnimalLabel_idCompra}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.idCompra}" title="#{bundle.AnimalTitle_idCompra}"/>
+            <h:outputText value="#{bundle.AnimalLabel_tipo}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{animalController.selected.tipo}" title="#{bundle.AnimalTitle_tipo}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditSacrificio">
+        <p:panelGrid columns="2" id="panelEditSacrificio">
+            <h:outputLabel value="#{bundle.SacrificioLabel_id}" for="id" />
+            <h:inputText id="id" value="#{sacrificioController.selected.id}" title="#{bundle.SacrificioTitle_id}" required="true" requiredMessage="#{bundle.SacrificioRequiredMessage_id}"/>
+            <h:outputLabel value="#{bundle.SacrificioLabel_pesoSacrificio}" for="pesoSacrificio" />
+            <h:inputText id="pesoSacrificio" value="#{sacrificioController.selected.pesoSacrificio}" title="#{bundle.SacrificioTitle_pesoSacrificio}" required="true" requiredMessage="#{bundle.SacrificioRequiredMessage_pesoSacrificio}"/>
+            <h:outputLabel value="#{bundle.SacrificioLabel_pesoCanalCaliente}" for="pesoCanalCaliente" />
+            <h:inputText id="pesoCanalCaliente" value="#{sacrificioController.selected.pesoCanalCaliente}" title="#{bundle.SacrificioTitle_pesoCanalCaliente}" required="true" requiredMessage="#{bundle.SacrificioRequiredMessage_pesoCanalCaliente}"/>
+            <h:outputLabel value="#{bundle.SacrificioLabel_pesoVisceras}" for="pesoVisceras" />
+            <h:inputText id="pesoVisceras" value="#{sacrificioController.selected.pesoVisceras}" title="#{bundle.SacrificioTitle_pesoVisceras}" required="true" requiredMessage="#{bundle.SacrificioRequiredMessage_pesoVisceras}"/>
+            <h:outputLabel value="#{bundle.SacrificioLabel_pesoPiel}" for="pesoPiel" />
+            <h:inputText id="pesoPiel" value="#{sacrificioController.selected.pesoPiel}" title="#{bundle.SacrificioTitle_pesoPiel}" required="true" requiredMessage="#{bundle.SacrificioRequiredMessage_pesoPiel}"/>
+            <h:outputLabel value="#{bundle.SacrificioLabel_pesoSebo}" for="pesoSebo" />
+            <h:inputText id="pesoSebo" value="#{sacrificioController.selected.pesoSebo}" title="#{bundle.SacrificioTitle_pesoSebo}" required="true" requiredMessage="#{bundle.SacrificioRequiredMessage_pesoSebo}"/>
+            <h:outputLabel value="#{bundle.SacrificioLabel_pesoCanalFrio}" for="pesoCanalFrio" />
+            <h:inputText id="pesoCanalFrio" value="#{sacrificioController.selected.pesoCanalFrio}" title="#{bundle.SacrificioTitle_pesoCanalFrio}" required="true" requiredMessage="#{bundle.SacrificioRequiredMessage_pesoCanalFrio}"/>
+            <h:outputLabel value="#{bundle.SacrificioLabel_pesoCanalEntrega}" for="pesoCanalEntrega" />
+            <h:inputText id="pesoCanalEntrega" value="#{sacrificioController.selected.pesoCanalEntrega}" title="#{bundle.SacrificioTitle_pesoCanalEntrega}" required="true" requiredMessage="#{bundle.SacrificioRequiredMessage_pesoCanalEntrega}"/>
+            <h:outputLabel value="#{bundle.SacrificioLabel_observaciones}" for="observaciones" />
+            <h:inputText id="observaciones" value="#{sacrificioController.selected.observaciones}" title="#{bundle.SacrificioTitle_observaciones}" required="true" requiredMessage="#{bundle.SacrificioRequiredMessage_observaciones}"/>
+            <h:outputLabel value="#{bundle.SacrificioLabel_animal}" for="animal" />
+            <h:selectOneMenu id="animal" value="#{sacrificioController.selected.animal}" title="#{bundle.SacrificioTitle_animal}" required="true" requiredMessage="#{bundle.SacrificioRequiredMessage_animal}">
+                <f:selectItems value="#{animalController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonSacrificio" icon="ui-icon-disk" oncomplete="dialogEditSacrificio.hide()" update=":formListSacrificio:listaSacrificio :formListSacrificio:gro"
+                             actionListener="#{sacrificioController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

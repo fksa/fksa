@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <p:panel id="panelEditAccionista" header="#{accionistaController.selected.nombre == null ? 'Nuevo Accionista' : accionistaController.selected }">
+    <h:form id="formEditAccionista">
+        <p:growl id="mensaje" showDetail="true"/>
+        <p:tabView id="tabAccionista">
+            <p:tab title="Detalles">  
+                <ui:include src="/pages/accionista/ViewAccionista.xhtml"></ui:include>
+                <div style="text-align: center">
+                    <p:commandButton id="saveButtonAccionista" icon="ui-icon-disk"
+                                     actionListener="#{accionistaController.update}"
+                                     value="#{bundle.SaveLink}"
+                                     title="#{bundle.SaveLink}"
+                                     update=":formEditAccionista:mensaje :panelEditAccionista"/>
+                </div>         
+            </p:tab>
+            <p:tab title="Pagos Acciones">  
+                <ui:include src="/pages/accionista/ListPagoAcciones.xhtml"></ui:include>
+            </p:tab>
+            <p:tab title="T&iacute;tulos Accionarios">  
+                <ui:include src="ListTitulo.xhtml"></ui:include>
+            </p:tab>
+            <p:tab title="Contratos Suscripci&oacute;n">  
+                <ui:include src="/pages/accionista/ListContratoSuscripcion.xhtml"></ui:include>
+            </p:tab>
+        </p:tabView>
+    </h:form>
+    </p:panel>
+</html>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListComprador" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <div style="text-align: right">
+                <p:commandButton id="addButtonComprador" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{compradorController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":formEditComprador:panelEditComprador"
+                                 oncomplete="dialogEditComprador.show()" process="addButtonComprador"/>    
+            </div>
+            <p:contextMenu for="listaComprador">  
+                <p:menuitem value="#{bundle.ViewLink}" update=":formViewComprador:panelViewComprador" icon="ui-icon-zoomin"
+                            oncomplete="dialogViewComprador.show()"/> 
+                <p:menuitem value="#{bundle.EditLink}" update=":formEditComprador:panelEditComprador" icon="ui-icon-pencil"
+                            oncomplete="dialogEditComprador.show()" disabled="#{LoginController.validarPermisos}"/> 
+                <p:menuitem value="#{bundle.DestroyLink}" update=":formListComprador:panelConfirmComprador" icon="ui-icon-closethick"
+                            oncomplete="confirmationComprador.show()" disabled="#{LoginController.validarPermisos}"/> 
+            </p:contextMenu>
+            <p:dataTable value="#{compradorController.items}" var="itemComprador" id="listaComprador" 
+                         selection="#{compradorController.selected}" selectionMode="single" paginator="true" rows="20" >
+                <p:column headerText="#{bundle.CompradorTitle_rut}"
+                          sortBy="#{itemComprador.rut}">
+                    <h:outputText value="#{itemComprador.rut}"/>
+                </p:column>
+                <p:column headerText="#{bundle.CompradorTitle_nombre}"
+                          sortBy="#{itemComprador.nombre}">
+                    <h:outputText value="#{itemComprador.nombre}"/>
+                </p:column>
+                <p:column headerText="#{bundle.CompradorTitle_direccion}"
+                          sortBy="#{itemComprador.direccion}">
+                    <h:outputText value="#{itemComprador.direccion}"/>
+                </p:column>
+                <p:column headerText="#{bundle.CompradorTitle_ciudad}"
+                          sortBy="#{itemComprador.ciudad}">
+                    <h:outputText value="#{itemComprador.ciudad}"/>
+                </p:column>
+                <p:column headerText="#{bundle.CompradorTitle_telefono}"
+                          sortBy="#{itemComprador.telefono}">
+                    <h:outputText value="#{itemComprador.telefono}"/>
+                </p:column>
+                <p:column headerText="#{bundle.CompradorTitle_soportes}"
+                          sortBy="#{itemComprador.soportes}">
+                    <h:outputText value="#{itemComprador.soportes}"/>
+                </p:column>
+                <p:column headerText="#{bundle.CompradorTitle_estado}"
+                          sortBy="#{itemComprador.estado}">
+                    <h:outputText value="#{itemComprador.estado}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{compradorController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationComprador" id="panelConfirmComprador">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaComprador" oncomplete="confirmationComprador.hide()"
+                                 actionListener="#{compradorController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationComprador.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewComprador" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="ViewComprador.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditComprador" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="EditComprador.xhtml"></ui:include>
+    </p:dialog>
+</html>

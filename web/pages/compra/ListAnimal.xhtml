@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListAnimal" styleClass="jsfcrud_list_form">
+        <div style="text-align: right">
+            <p:commandButton id="addButtonAnimal" icon="ui-icon-plusthick"
+                             disabled="#{compraController.selected.id == null or LoginController.validarPermisos}"
+                             action="#{compraController.createAnimal}"
+                             title="#{bundle.CreateLink}"
+                             update=":formEditCompra:mensaje :formListCompra:listaCompra
+                                        :formEditCompra:tabCompra:panelEditCompra2
+                                        :formEditCompra:tabCompra:nroAnimales
+                                        :formEditCompra:tabCompra:vlorAnimales
+                                        :formEditCompra:tabCompra:formListAnimal:listaAnimal"  
+                             process="@this"/>    
+        </div>
+        <p:dataTable value="#{compraController.selected.animalList}" var="itemAnimal" id="listaAnimal" paginator="true" rows="10" editable="true" >
+            <p:ajax event="rowEdit" listener="#{compraController.saveAnimal}"
+                             update=":formEditCompra:mensaje :formListCompra:listaCompra
+                                        :formEditCompra:tabCompra:panelEditCompra2
+                                        :formEditCompra:tabCompra:nroAnimales
+                                        :formEditCompra:tabCompra:vlorAnimales
+                                        :formEditCompra:tabCompra:formListAnimal:listaAnimal" />    
+            <p:ajax event="rowEditCancel" update=":formEditCompra:tabCompra:formListAnimal:listaAnimal"/>  
+            <p:column headerText="#{bundle.AnimalTitle_numeroFksa}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.numeroFksa}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.numeroFksa}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.AnimalTitle_tipo}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.idTipo.nombre}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <h:selectOneMenu id="tipo" value="#{itemAnimal.idTipo}" title="#{bundle.AnimalTitle_tipo}" required="true" requiredMessage="#{bundle.AnimalRequiredMessage_tipo}">
+                            <f:selectItems value="#{tipoAnimalController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.AnimalTitle_pesoCompra}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.pesoCompra}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.pesoCompra}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.AnimalTitle_valorKgCompra}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemAnimal.valorKgCompra}">
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemAnimal.valorKgCompra}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.AnimalTitle_valorTotalCompra}">
+                <h:outputText value="#{itemAnimal.valorTotalCompra}">
+                    <f:convertNumber integerOnly="true"/>
+                </h:outputText>
+            </p:column>
+            <p:column style="width:6%">  
+                <p:rowEditor/>
+            </p:column>
+            <p:column style="width:6%" headerText="&nbsp;" >
+              <p:commandLink id="delButtonAnimal" styleClass="ui-icon ui-icon-close"
+                             disabled="#{itemAnimal.idVenta != null or LoginController.validarPermisos}"
+                             action="#{compraController.removeAnimal(itemAnimal)}"
+                             title="#{bundle.DestroyLink}"
+                             update=":formEditCompra:mensaje :formListCompra:listaCompra
+                                        :formEditCompra:tabCompra:panelEditCompra2
+                                        :formEditCompra:tabCompra:nroAnimales
+                                        :formEditCompra:tabCompra:vlorAnimales
+                                        :formEditCompra:tabCompra:formListAnimal:listaAnimal"  
+                             process="@this"/>    
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</html>

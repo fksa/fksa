@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditProductoVenta">
+        <p:panelGrid columns="2" id="panelEditProductoVenta">
+            <h:outputLabel value="#{bundle.ProductoVentaLabel_id}" for="id" />
+            <h:inputText id="id" value="#{productoVentaController.selected.id}" title="#{bundle.ProductoVentaTitle_id}" required="true" requiredMessage="#{bundle.ProductoVentaRequiredMessage_id}"/>
+            <h:outputLabel value="#{bundle.ProductoVentaLabel_valorUnitario}" for="valorUnitario" />
+            <h:inputText id="valorUnitario" value="#{productoVentaController.selected.valorUnitario}" title="#{bundle.ProductoVentaTitle_valorUnitario}" required="true" requiredMessage="#{bundle.ProductoVentaRequiredMessage_valorUnitario}"/>
+            <h:outputLabel value="#{bundle.ProductoVentaLabel_unidades}" for="unidades" />
+            <h:inputText id="unidades" value="#{productoVentaController.selected.unidades}" title="#{bundle.ProductoVentaTitle_unidades}" required="true" requiredMessage="#{bundle.ProductoVentaRequiredMessage_unidades}"/>
+            <h:outputLabel value="#{bundle.ProductoVentaLabel_valorTotal}" for="valorTotal" />
+            <h:inputText id="valorTotal" value="#{productoVentaController.selected.valorTotal}" title="#{bundle.ProductoVentaTitle_valorTotal}" required="true" requiredMessage="#{bundle.ProductoVentaRequiredMessage_valorTotal}"/>
+            <h:outputLabel value="#{bundle.ProductoVentaLabel_observaciones}" for="observaciones" />
+            <h:inputText id="observaciones" value="#{productoVentaController.selected.observaciones}" title="#{bundle.ProductoVentaTitle_observaciones}" required="true" requiredMessage="#{bundle.ProductoVentaRequiredMessage_observaciones}"/>
+            <h:outputLabel value="#{bundle.ProductoVentaLabel_idTipo}" for="idTipo" />
+            <h:selectOneMenu id="idTipo" value="#{productoVentaController.selected.idTipo}" title="#{bundle.ProductoVentaTitle_idTipo}" required="true" requiredMessage="#{bundle.ProductoVentaRequiredMessage_idTipo}">
+                <f:selectItems value="#{tipoProductoController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+            <h:outputLabel value="#{bundle.ProductoVentaLabel_idVenta}" for="idVenta" />
+            <h:selectOneMenu id="idVenta" value="#{productoVentaController.selected.idVenta}" title="#{bundle.ProductoVentaTitle_idVenta}" required="true" requiredMessage="#{bundle.ProductoVentaRequiredMessage_idVenta}">
+                <f:selectItems value="#{ventaController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonProductoVenta" icon="ui-icon-disk" oncomplete="dialogEditProductoVenta.hide()" update=":formListProductoVenta:listaProductoVenta :formListProductoVenta:gro"
+                             actionListener="#{productoVentaController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

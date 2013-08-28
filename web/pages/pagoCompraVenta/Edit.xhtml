@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditPagoCompraVenta">
+        <p:panelGrid columns="2" id="panelEditPagoCompraVenta">
+            <h:outputLabel value="#{bundle.PagoCompraVentaLabel_id}" for="id" />
+            <h:inputText id="id" value="#{pagoCompraVentaController.selected.id}" title="#{bundle.PagoCompraVentaTitle_id}" required="true" requiredMessage="#{bundle.PagoCompraVentaRequiredMessage_id}"/>
+            <h:outputLabel value="#{bundle.PagoCompraVentaLabel_valor}" for="valor" />
+            <h:inputText id="valor" value="#{pagoCompraVentaController.selected.valor}" title="#{bundle.PagoCompraVentaTitle_valor}" required="true" requiredMessage="#{bundle.PagoCompraVentaRequiredMessage_valor}"/>
+            <h:outputLabel value="#{bundle.PagoCompraVentaLabel_observaciones}" for="observaciones" />
+            <h:inputText id="observaciones" value="#{pagoCompraVentaController.selected.observaciones}" title="#{bundle.PagoCompraVentaTitle_observaciones}" required="true" requiredMessage="#{bundle.PagoCompraVentaRequiredMessage_observaciones}"/>
+            <h:outputLabel value="#{bundle.PagoCompraVentaLabel_idCompra}" for="idCompra" />
+            <h:selectOneMenu id="idCompra" value="#{pagoCompraVentaController.selected.idCompra}" title="#{bundle.PagoCompraVentaTitle_idCompra}" >
+                <f:selectItems value="#{compraController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+            <h:outputLabel value="#{bundle.PagoCompraVentaLabel_idVenta}" for="idVenta" />
+            <h:selectOneMenu id="idVenta" value="#{pagoCompraVentaController.selected.idVenta}" title="#{bundle.PagoCompraVentaTitle_idVenta}" >
+                <f:selectItems value="#{ventaController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonPagoCompraVenta" icon="ui-icon-disk" oncomplete="dialogEditPagoCompraVenta.hide()" update=":formListPagoCompraVenta:listaPagoCompraVenta :formListPagoCompraVenta:gro"
+                             actionListener="#{pagoCompraVentaController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

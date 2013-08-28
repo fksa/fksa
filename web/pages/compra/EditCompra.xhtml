@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <p:panel id="panelEditCompra">
+        <f:facet name="header">
+            <h:outputText value="#{compraController.selected.idVendedor == null ? 'Nueva Compra' : compraController.selected.idVendedor.nombre} "/>
+            <h:outputText value="#{compraController.selected.fechaCompra}"><f:convertDateTime pattern=" (MM/dd/yyyy)" /></h:outputText>
+        </f:facet>  
+    <h:form id="formEditCompra">
+        <p:growl id="mensaje" showDetail="true"/>
+        <p:tabView id="tabCompra" effect="blind" effectDuration="normal">
+            <p:tab title="Informaci&oacute;n">  
+                <p:panelGrid columns="2" id="panelEditCompra2">
+                    <h:outputLabel value="#{bundle.CompraLabel_idVendedor}" for="idVendedor" />
+                    <h:selectOneMenu id="idVendedor" value="#{compraController.selected.idVendedor}" title="#{bundle.CompraTitle_idVendedor}" required="true" requiredMessage="#{bundle.CompraRequiredMessage_idVendedor}">
+                        <f:selectItems value="#{vendedorController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CompraLabel_fechaCompra}" for="fechaCompra" />
+                    <p:calendar value="#{compraController.selected.fechaCompra}" id="fechaCompra" title="#{bundle.CompraTitle_fechaCompra}" required="true" requiredMessage="#{bundle.CompraRequiredMessage_fechaCompra}"/>  
+                    <h:outputLabel value="#{bundle.CompraLabel_fechaSaldo}" for="fechaSaldo" />
+                    <p:calendar value="#{compraController.selected.fechaSaldo}" id="fechaSaldo" title="#{bundle.CompraTitle_fechaSaldo}" required="true" requiredMessage="#{bundle.CompraRequiredMessage_fechaSaldo}"/>  
+                    <h:outputLabel value="#{bundle.CompraLabel_valor}" for="valor" />
+                    <h:outputText value="#{compraController.selected.valor}" id="valor">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.CompraLabel_saldo}" for="saldo" />
+                    <h:outputText value="#{compraController.selected.saldo}" id="saldo">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.CompraLabel_observaciones}" for="observaciones" />
+                    <h:inputTextarea rows="4" cols="25" id="observaciones" value="#{compraController.selected.observaciones}" title="#{bundle.CompraTitle_observaciones}" />
+                </p:panelGrid>
+                <div style="text-align: center">
+                    <p:commandButton id="saveButtonCompra" icon="ui-icon-disk" oncomplete=""
+                                     update=":formListCompra:listaCompra :formListCompra:gro :panelEditCompra"
+                                     actionListener="#{compraController.update}"
+                                     value="#{bundle.SaveLink}"
+                                     title="#{bundle.SaveLink}"/>
+                </div>
+            </p:tab>
+            <p:tab>  
+                <f:facet name="title">
+                    <h:outputText id="nroAnimales" value=" Animales (#{compraController.selected.animalList.size()}) $ "/>
+                    <h:outputText id="vlorAnimales" value="#{compraController.selected.valor}"><f:convertNumber integerOnly="true"/></h:outputText>
+                </f:facet>  
+                <ui:include src="ListAnimal.xhtml"></ui:include>
+            </p:tab>
+            <p:tab>  
+                <f:facet name="title">
+                    <h:outputText value="Pagos: $ "/>
+                    <h:outputText id="vlorPagos" value="#{compraController.selected.valor - compraController.selected.saldo}"><f:convertNumber integerOnly="true"/></h:outputText>
+                </f:facet>  
+                <ui:include src="ListPagoCompraVenta.xhtml"></ui:include>
+            </p:tab>
+        </p:tabView>
+    </h:form>
+    </p:panel>
+</html>

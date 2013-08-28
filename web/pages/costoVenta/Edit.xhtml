@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditCostoVenta">
+        <p:panelGrid columns="2" id="panelEditCostoVenta">
+            <h:outputLabel value="#{bundle.CostoVentaLabel_id}" for="id" />
+            <h:inputText id="id" value="#{costoVentaController.selected.id}" title="#{bundle.CostoVentaTitle_id}" required="true" requiredMessage="#{bundle.CostoVentaRequiredMessage_id}"/>
+            <h:outputLabel value="#{bundle.CostoVentaLabel_valorUnitario}" for="valorUnitario" />
+            <h:inputText id="valorUnitario" value="#{costoVentaController.selected.valorUnitario}" title="#{bundle.CostoVentaTitle_valorUnitario}" required="true" requiredMessage="#{bundle.CostoVentaRequiredMessage_valorUnitario}"/>
+            <h:outputLabel value="#{bundle.CostoVentaLabel_unidades}" for="unidades" />
+            <h:inputText id="unidades" value="#{costoVentaController.selected.unidades}" title="#{bundle.CostoVentaTitle_unidades}" required="true" requiredMessage="#{bundle.CostoVentaRequiredMessage_unidades}"/>
+            <h:outputLabel value="#{bundle.CostoVentaLabel_valorTotal}" for="valorTotal" />
+            <h:inputText id="valorTotal" value="#{costoVentaController.selected.valorTotal}" title="#{bundle.CostoVentaTitle_valorTotal}" required="true" requiredMessage="#{bundle.CostoVentaRequiredMessage_valorTotal}"/>
+            <h:outputLabel value="#{bundle.CostoVentaLabel_observaciones}" for="observaciones" />
+            <h:inputText id="observaciones" value="#{costoVentaController.selected.observaciones}" title="#{bundle.CostoVentaTitle_observaciones}" required="true" requiredMessage="#{bundle.CostoVentaRequiredMessage_observaciones}"/>
+            <h:outputLabel value="#{bundle.CostoVentaLabel_idTipo}" for="idTipo" />
+            <h:selectOneMenu id="idTipo" value="#{costoVentaController.selected.idTipo}" title="#{bundle.CostoVentaTitle_idTipo}" required="true" requiredMessage="#{bundle.CostoVentaRequiredMessage_idTipo}">
+                <f:selectItems value="#{tipoCostoController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+            <h:outputLabel value="#{bundle.CostoVentaLabel_idVenta}" for="idVenta" />
+            <h:selectOneMenu id="idVenta" value="#{costoVentaController.selected.idVenta}" title="#{bundle.CostoVentaTitle_idVenta}" required="true" requiredMessage="#{bundle.CostoVentaRequiredMessage_idVenta}">
+                <f:selectItems value="#{ventaController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonCostoVenta" icon="ui-icon-disk" oncomplete="dialogEditCostoVenta.hide()" update=":formListCostoVenta:listaCostoVenta :formListCostoVenta:gro"
+                             actionListener="#{costoVentaController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

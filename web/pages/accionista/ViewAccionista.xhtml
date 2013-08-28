@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formViewAccionista">
+        <p:contextMenu for="panelViewAccionista">  
+            <p:menuitem value="#{bundle.EditLink}" action="#{accionistaController.prepareEdit()}" icon="ui-icon-pencil"
+                        disabled="#{LoginController.validarPermisos}" update=":panelEditAccionista"
+                        oncomplete="dialogViewAccionista.hide();dialogEditAccionista.show();"/>    
+            <p:menuitem value="#{bundle.DestroyLink}" update=":formListAccionista" icon="ui-icon-closethick"
+                        oncomplete="dialogViewAccionista.hide();confirmationAccionista.show();" disabled="true"/> 
+        </p:contextMenu>
+        <p:panel id="panelViewAccionista">
+        <h:panelGrid columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.AccionistaLabel_nombre}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.nombre}" title="#{bundle.AccionistaTitle_nombre}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_identificacion}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.strIdentificacion}" title="#{bundle.AccionistaTitle_identificacion}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_lugarExpedicion}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.lugarExpedicion}" title="#{bundle.AccionistaTitle_lugarExpedicion}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_telefono}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.telefono}" title="#{bundle.AccionistaTitle_telefono}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_telefono2}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.telefono2}" title="#{bundle.AccionistaTitle_telefono2}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_departamento}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.departamento}" title="#{bundle.AccionistaTitle_departamento}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_ciudad}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.ciudad}" title="#{bundle.AccionistaTitle_ciudad}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_direccion}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.direccion}" title="#{bundle.AccionistaTitle_direccion}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_vereda}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.vereda}" title="#{bundle.AccionistaTitle_vereda}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_tituloEntregado}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.tituloEntregado}" title="#{bundle.AccionistaTitle_tituloEntregado}" style="#{ !accionistaController.selected.validarEntregaTitulo()?'color: red':''}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_cartaFirmada}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.cartaFirmada}" title="#{bundle.AccionistaTitle_cartaFirmada}"/>
+            <h:outputText value="#{bundle.AccionistaLabel_estado}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.estado}" title="#{bundle.AccionistaTitle_estado}"/>
+            <h:outputText value="#{bundle.SasLabel_capitalSuscrito}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.totalSuscrito()}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.SasLabel_capitalPagado}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.totalPagos()}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+            <h:outputText value="T&iacute;tulos"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{accionistaController.selected.totalTitulos()}" style="#{ !accionistaController.selected.validar()?'color: red':''}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+        </h:panelGrid>
+        </p:panel>
+    </h:form>
+</html>

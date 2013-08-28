@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListTitulo" styleClass="jsfcrud_list_form">
+        <div style="text-align: right">
+            <p:commandButton id="addButtonTitulo" icon="ui-icon-plus"
+                             disabled="#{accionistaController.selected.validar() or LoginController.validarPermisos}"
+                             action="#{accionistaController.createTitulo()}"
+                             title="#{bundle.CreateLink}"
+                             update=":formEditAccionista:mensaje :formEditAccionista:tabAccionista:formListTitulo"
+                             process="addButtonTitulo"/>    
+        </div>
+        <p:dataTable value="#{accionistaController.selected.tituloList}" var="itemTitulo" id="listaTitulo"
+                     editable="true">
+            <p:ajax event="rowEdit" listener="#{accionistaController.saveTitulo}" update=":formEditAccionista:mensaje :formEditAccionista:tabAccionista:formListTitulo:listaTitulo" />  
+            <p:ajax event="rowEditCancel" update=":formEditAccionista:mensaje :formEditAccionista:tabAccionista:formListTitulo:listaTitulo" />  
+            <p:column headerText="#{bundle.TituloTitle_idSas}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemTitulo.idSas.nombre}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <h:selectOneMenu id="idSas" value="#{itemTitulo.idSas}" title="#{bundle.TituloTitle_idSas}" required="true" requiredMessage="#{bundle.TituloRequiredMessage_idSas}">
+                            <f:selectItems value="#{sasController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.TituloTitle_tituloNumero}"> 
+                <h:outputText value="#{itemTitulo.tituloNumero}"/>
+            </p:column>
+            <p:column headerText="#{bundle.TituloTitle_numeroAcciones}"> 
+                <h:outputText value="#{itemTitulo.numeroAcciones}">
+                    <f:convertNumber integerOnly="true"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="#{bundle.PagoAccionesTitle_valor} T&iacute;tulo" style="text-align: right"> 
+                <f:facet name="footer">
+                    <h:outputText value="#{accionistaController.selected != null ? accionistaController.selected.totalTitulos():0}" >
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </f:facet>  
+                <h:outputText value="#{itemTitulo.numeroAcciones*2000}">
+                    <f:convertNumber integerOnly="true"/>
+                </h:outputText>
+            </p:column>
+            <p:column style="width:6%">  
+                <p:rowEditor rendered="#{itemTitulo.idSas==null}"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</html>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewPagoAcciones">
+        <h:panelGrid id="panelViewPagoAcciones" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.PagoAccionesLabel_id}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoAccionesController.selected.id}" title="#{bundle.PagoAccionesTitle_id}"/>
+            <h:outputText value="#{bundle.PagoAccionesLabel_fecha}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoAccionesController.selected.fecha}" title="#{bundle.PagoAccionesTitle_fecha}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            <h:outputText value="#{bundle.PagoAccionesLabel_numero}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoAccionesController.selected.numero}" title="#{bundle.PagoAccionesTitle_numero}"/>
+            <h:outputText value="#{bundle.PagoAccionesLabel_valor}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoAccionesController.selected.valor}" title="#{bundle.PagoAccionesTitle_valor}"/>
+            <h:outputText value="#{bundle.PagoAccionesLabel_comisionBancaria}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoAccionesController.selected.comisionBancaria}" title="#{bundle.PagoAccionesTitle_comisionBancaria}"/>
+            <h:outputText value="#{bundle.PagoAccionesLabel_valorNeto}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoAccionesController.selected.valorNeto}" title="#{bundle.PagoAccionesTitle_valorNeto}"/>
+            <h:outputText value="#{bundle.PagoAccionesLabel_observaciones}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoAccionesController.selected.observaciones}" title="#{bundle.PagoAccionesTitle_observaciones}"/>
+            <h:outputText value="#{bundle.PagoAccionesLabel_idAccionista}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoAccionesController.selected.idAccionista}" title="#{bundle.PagoAccionesTitle_idAccionista}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

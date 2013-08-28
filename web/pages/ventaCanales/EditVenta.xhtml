@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <p:panel id="panelEditVenta" header="#{ventaCanalesController.selected.idComprador == null ? 'Nueva Compra' : ventaCanalesController.selected }">
+    <h:form id="formEditVenta">
+        <p:growl id="mensaje" showDetail="true"/>
+        <p:tabView id="tabVenta">
+            <p:tab title="Informaci&oacute;n">  
+                <p:panelGrid columns="2" id="panelEditVenta2">
+                    <h:outputLabel value="#{bundle.VentaLabel_idComprador}" for="idComprador" />
+                    <h:outputText id="idComprador" value="#{ventaCanalesController.selected.idComprador.nombre}" title="#{bundle.VentaTitle_idComprador}"/>
+                    <h:outputLabel value="#{bundle.VentaLabel_fechaVenta}" for="fechaVenta" />
+                    <h:outputText value="#{ventaCanalesController.selected.fechaVenta}" id="fechaVenta" title="#{bundle.VentaTitle_fechaVenta}">  
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.VentaLabel_fechaSaldo}" for="fechaSaldo" />
+                    <h:outputText value="#{ventaCanalesController.selected.fechaSaldo}" id="fechaSaldo" title="#{bundle.VentaTitle_fechaSaldo}">  
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.VentaLabel_tipo}" for="tipo" />
+                    <h:outputText id="tipo" value="#{ventaCanalesController.selected.tipo}" title="#{bundle.VentaTitle_tipo}"/>
+                    <h:outputLabel value="#{bundle.VentaLabel_totalVenta}" for="totalVenta" />
+                    <h:outputText id="totalVenta" value="#{ventaCanalesController.selected.totalVenta}" title="#{bundle.VentaTitle_totalVenta}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.VentaLabel_totalCosto}" for="totalCosto" />
+                    <h:outputText id="totalCosto" value="#{ventaCanalesController.selected.totalCosto}" title="#{bundle.VentaTitle_totalCosto}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.VentaLabel_utilidad}" for="utilidad" />
+                    <h:outputText id="utilidad" value="#{ventaCanalesController.selected.utilidad}" title="#{bundle.VentaTitle_utilidad}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.VentaLabel_saldo}" for="saldo" />
+                    <h:outputText id="saldo" value="#{ventaCanalesController.selected.saldo}" title="#{bundle.VentaTitle_saldo}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.VentaLabel_observaciones}" for="observaciones" />
+                    <h:inputTextarea rows="4" cols="25" id="observaciones" value="#{ventaCanalesController.selected.observaciones}" title="#{bundle.VentaTitle_observaciones}" />
+                </p:panelGrid>
+                <div style="text-align: center">
+                    <p:commandButton id="saveButtonVenta" icon="ui-icon-disk" 
+                                    update=":formListVenta:listaVenta :formListVenta:gro :panelEditVenta"
+                                    actionListener="#{ventaCanalesController.update}" value="#{bundle.SaveLink}" title="#{bundle.SaveLink}"/>
+                </div>
+            </p:tab>
+            <p:tab title="Detalle">  
+                <ui:include src="ListAnimal.xhtml"></ui:include>
+            </p:tab>
+        </p:tabView>
+    </h:form>
+    </p:panel>
+</html>

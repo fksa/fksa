@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewVendedor">
+        <h:panelGrid id="panelViewVendedor" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.VendedorLabel_rut}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{vendedorController.selected.rut}" title="#{bundle.VendedorTitle_rut}"/>
+            <h:outputText value="#{bundle.VendedorLabel_nombre}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{vendedorController.selected.nombre}" title="#{bundle.VendedorTitle_nombre}"/>
+            <h:outputText value="#{bundle.VendedorLabel_direccion}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{vendedorController.selected.direccion}" title="#{bundle.VendedorTitle_direccion}"/>
+            <h:outputText value="#{bundle.VendedorLabel_ciudad}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{vendedorController.selected.ciudad}" title="#{bundle.VendedorTitle_ciudad}"/>
+            <h:outputText value="#{bundle.VendedorLabel_telefono}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{vendedorController.selected.telefono}" title="#{bundle.VendedorTitle_telefono}"/>
+            <h:outputText value="#{bundle.VendedorLabel_soportes}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{vendedorController.selected.soportes}" title="#{bundle.VendedorTitle_soportes}"/>
+            <h:outputText value="#{bundle.VendedorLabel_estado}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{vendedorController.selected.estado}" title="#{bundle.VendedorTitle_estado}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

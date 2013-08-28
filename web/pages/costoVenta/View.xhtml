@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewCostoVenta">
+        <h:panelGrid id="panelViewCostoVenta" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.CostoVentaLabel_id}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{costoVentaController.selected.id}" title="#{bundle.CostoVentaTitle_id}"/>
+            <h:outputText value="#{bundle.CostoVentaLabel_valorUnitario}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{costoVentaController.selected.valorUnitario}" title="#{bundle.CostoVentaTitle_valorUnitario}"/>
+            <h:outputText value="#{bundle.CostoVentaLabel_unidades}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{costoVentaController.selected.unidades}" title="#{bundle.CostoVentaTitle_unidades}"/>
+            <h:outputText value="#{bundle.CostoVentaLabel_valorTotal}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{costoVentaController.selected.valorTotal}" title="#{bundle.CostoVentaTitle_valorTotal}"/>
+            <h:outputText value="#{bundle.CostoVentaLabel_observaciones}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{costoVentaController.selected.observaciones}" title="#{bundle.CostoVentaTitle_observaciones}"/>
+            <h:outputText value="#{bundle.CostoVentaLabel_idTipo}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{costoVentaController.selected.idTipo}" title="#{bundle.CostoVentaTitle_idTipo}"/>
+            <h:outputText value="#{bundle.CostoVentaLabel_idVenta}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{costoVentaController.selected.idVenta}" title="#{bundle.CostoVentaTitle_idVenta}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

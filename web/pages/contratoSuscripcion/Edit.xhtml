@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditContratoSuscripcion">
+        <p:panelGrid columns="2" id="panelEditContratoSuscripcion">
+            <h:outputLabel value="#{bundle.ContratoSuscripcionLabel_id}" for="id" />
+            <h:inputText id="id" value="#{contratoSuscripcionController.selected.id}" title="#{bundle.ContratoSuscripcionTitle_id}" required="true" requiredMessage="#{bundle.ContratoSuscripcionRequiredMessage_id}"/>
+            <h:outputLabel value="#{bundle.ContratoSuscripcionLabel_accionesSuscritas}" for="accionesSuscritas" />
+            <h:inputText id="accionesSuscritas" value="#{contratoSuscripcionController.selected.accionesSuscritas}" title="#{bundle.ContratoSuscripcionTitle_accionesSuscritas}" required="true" requiredMessage="#{bundle.ContratoSuscripcionRequiredMessage_accionesSuscritas}"/>
+            <h:outputLabel value="#{bundle.ContratoSuscripcionLabel_idAccionista}" for="idAccionista" />
+            <h:selectOneMenu id="idAccionista" value="#{contratoSuscripcionController.selected.idAccionista}" title="#{bundle.ContratoSuscripcionTitle_idAccionista}" required="true" requiredMessage="#{bundle.ContratoSuscripcionRequiredMessage_idAccionista}">
+                <f:selectItems value="#{accionistaController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonContratoSuscripcion" icon="ui-icon-disk" oncomplete="dialogEditContratoSuscripcion.hide()" update=":formListContratoSuscripcion:listaContratoSuscripcion :formListContratoSuscripcion:gro"
+                             actionListener="#{contratoSuscripcionController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListPagoAcciones" styleClass="jsfcrud_list_form">
+        <div style="text-align: right">
+            <p:commandButton id="addButtonPagoAcciones" icon="ui-icon-plus"
+                             disabled="#{LoginController.validarPermisos}"
+                             action="#{accionistaController.createPago()}"
+                             title="#{bundle.CreateLink}"
+                             update=":formEditAccionista:mensaje :formEditAccionista:tabAccionista:formListPagoAcciones:listaPagoAcciones"
+                             process="addButtonPagoAcciones"/>    
+        </div>
+        <p:dataTable value="#{accionistaController.selected.pagoAccionesList}" var="itemPagoAcciones" id="listaPagoAcciones"
+                     editable="true">
+            <p:ajax event="rowEdit" listener="#{accionistaController.updatePago}" update=":formEditAccionista:mensaje :formEditAccionista:tabAccionista:formListPagoAcciones:listaPagoAcciones" />  
+            <p:ajax event="rowEditCancel" update=":formEditAccionista:mensaje :formEditAccionista:tabAccionista:formListPagoAcciones:listaPagoAcciones" />  
+            <p:column headerText="#{bundle.PagoAccionesTitle_fecha}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemPagoAcciones.fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:calendar value="#{itemPagoAcciones.fecha}" id="popupCal" />  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.PagoAccionesTitle_numero}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemPagoAcciones.numero}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemPagoAcciones.numero}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.PagoAccionesTitle_valor}" style="text-align: right">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemPagoAcciones.valor}">
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemPagoAcciones.valor}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.PagoAccionesTitle_comisionBancaria}" style="text-align: right">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemPagoAcciones.comisionBancaria}">
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemPagoAcciones.comisionBancaria}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.PagoAccionesTitle_observaciones}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemPagoAcciones.observaciones}">
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemPagoAcciones.observaciones}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.PagoAccionesTitle_valorNeto}" style="text-align: right">
+                <f:facet name="footer">
+                    <h:outputText value="#{accionistaController.selected != null ? accionistaController.selected.totalPagos():0}" >
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </f:facet>  
+                <h:outputText value="#{itemPagoAcciones.valorNeto}">
+                    <f:convertNumber integerOnly="true"/>
+                </h:outputText>
+            </p:column>
+            <p:column style="width:6%">  
+                <p:rowEditor/>
+            </p:column>
+        </p:dataTable>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{pagoAccionesController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationPagoAcciones" id="panelConfirmPagoAcciones">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaPagoAcciones" oncomplete="confirmationPagoAcciones.hide()"
+                                 actionListener="#{pagoAccionesController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationPagoAcciones.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+</html>

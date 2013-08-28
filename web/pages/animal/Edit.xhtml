@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditAnimal">
+        <p:panelGrid columns="2" id="panelEditAnimal">
+            <h:outputLabel value="#{bundle.AnimalLabel_id}" for="id" />
+            <h:inputText id="id" value="#{animalController.selected.id}" title="#{bundle.AnimalTitle_id}" required="true" requiredMessage="#{bundle.AnimalRequiredMessage_id}"/>
+            <h:outputLabel value="#{bundle.AnimalLabel_numeroFksa}" for="numeroFksa" />
+            <h:inputText id="numeroFksa" value="#{animalController.selected.numeroFksa}" title="#{bundle.AnimalTitle_numeroFksa}" required="true" requiredMessage="#{bundle.AnimalRequiredMessage_numeroFksa}"/>
+            <h:outputLabel value="#{bundle.AnimalLabel_pesoCompra}" for="pesoCompra" />
+            <h:inputText id="pesoCompra" value="#{animalController.selected.pesoCompra}" title="#{bundle.AnimalTitle_pesoCompra}" required="true" requiredMessage="#{bundle.AnimalRequiredMessage_pesoCompra}"/>
+            <h:outputLabel value="#{bundle.AnimalLabel_valorKgCompra}" for="valorKgCompra" />
+            <h:inputText id="valorKgCompra" value="#{animalController.selected.valorKgCompra}" title="#{bundle.AnimalTitle_valorKgCompra}" required="true" requiredMessage="#{bundle.AnimalRequiredMessage_valorKgCompra}"/>
+            <h:outputLabel value="#{bundle.AnimalLabel_valorTotalCompra}" for="valorTotalCompra" />
+            <h:inputText id="valorTotalCompra" value="#{animalController.selected.valorTotalCompra}" title="#{bundle.AnimalTitle_valorTotalCompra}" required="true" requiredMessage="#{bundle.AnimalRequiredMessage_valorTotalCompra}"/>
+            <h:outputLabel value="#{bundle.AnimalLabel_pesoVenta}" for="pesoVenta" />
+            <h:inputText id="pesoVenta" value="#{animalController.selected.pesoVenta}" title="#{bundle.AnimalTitle_pesoVenta}" />
+            <h:outputLabel value="#{bundle.AnimalLabel_valorKgVenta}" for="valorKgVenta" />
+            <h:inputText id="valorKgVenta" value="#{animalController.selected.valorKgVenta}" title="#{bundle.AnimalTitle_valorKgVenta}" />
+            <h:outputLabel value="#{bundle.AnimalLabel_valorTotalVenta}" for="valorTotalVenta" />
+            <h:inputText id="valorTotalVenta" value="#{animalController.selected.valorTotalVenta}" title="#{bundle.AnimalTitle_valorTotalVenta}" />
+            <h:outputLabel value="#{bundle.AnimalLabel_sacrificio}" for="sacrificio" />
+            <h:selectOneMenu id="sacrificio" value="#{animalController.selected.sacrificio}" title="#{bundle.AnimalTitle_sacrificio}" >
+                <f:selectItems value="#{sacrificioController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+            <h:outputLabel value="#{bundle.AnimalLabel_idVenta}" for="idVenta" />
+            <h:selectOneMenu id="idVenta" value="#{animalController.selected.idVenta}" title="#{bundle.AnimalTitle_idVenta}" >
+                <f:selectItems value="#{ventaController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+            <h:outputLabel value="#{bundle.AnimalLabel_idCompra}" for="idCompra" />
+            <h:selectOneMenu id="idCompra" value="#{animalController.selected.idCompra}" title="#{bundle.AnimalTitle_idCompra}" required="true" requiredMessage="#{bundle.AnimalRequiredMessage_idCompra}">
+                <f:selectItems value="#{compraController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+            <h:outputLabel value="#{bundle.AnimalLabel_tipo}" for="tipo" />
+            <h:selectOneMenu id="tipo" value="#{animalController.selected.tipo}" title="#{bundle.AnimalTitle_tipo}" required="true" requiredMessage="#{bundle.AnimalRequiredMessage_tipo}">
+                <f:selectItems value="#{tipoAnimalController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonAnimal" icon="ui-icon-disk" oncomplete="dialogEditAnimal.hide()" update=":formListAnimal:listaAnimal :formListAnimal:gro"
+                             actionListener="#{animalController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

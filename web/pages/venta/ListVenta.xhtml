@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListVenta" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <div style="text-align: right">
+                <p:commandButton id="addButtonVenta" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{ventaController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":panelEditVenta"
+                                 oncomplete="dialogEditVenta.show()" process="addButtonVenta"/>    
+            </div>
+            <p:contextMenu for="listaVenta">  
+                <p:menuitem value="#{bundle.ViewLink}" update=":formViewVenta:panelViewVenta" icon="ui-icon-zoomin"
+                            oncomplete="dialogViewVenta.show()"/> 
+                <p:menuitem value="#{bundle.EditLink}" update=":panelEditVenta" icon="ui-icon-pencil"
+                            oncomplete="dialogEditVenta.show()" disabled="#{LoginController.validarPermisos}"/> 
+                <p:menuitem value="#{bundle.DestroyLink}" update=":formListVenta:panelConfirmVenta" icon="ui-icon-closethick"
+                            oncomplete="confirmationVenta.show()" disabled="#{LoginController.validarPermisos}"/> 
+            </p:contextMenu>
+            <p:dataTable value="#{ventaController.items}" var="itemVenta" id="listaVenta" 
+                         selection="#{ventaController.selected}" selectionMode="single" paginator="true" rows="20" >
+                <p:column headerText="#{bundle.VentaTitle_fechaVenta}"
+                          sortBy="#{itemVenta.fechaVenta}">
+                    <h:outputText value="#{itemVenta.fechaVenta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_idComprador}"
+                          sortBy="#{itemVenta.idComprador.nombre}">
+                    <h:outputText value="#{itemVenta.idComprador.nombre}"/>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_tipo}"
+                          sortBy="#{itemVenta.tipo}">
+                    <h:outputText value="#{itemVenta.tipo}"/>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_totalVenta}"
+                          sortBy="#{itemVenta.totalVenta}">
+                    <h:outputText value="#{itemVenta.totalVenta}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_totalCosto}"
+                          sortBy="#{itemVenta.totalCosto}">
+                    <h:outputText value="#{itemVenta.totalCosto}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_utilidad}"
+                          sortBy="#{itemVenta.utilidad}">
+                    <h:outputText value="#{itemVenta.utilidad}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_saldo}"
+                          sortBy="#{itemVenta.saldo}" id="saldoFilter">
+                    <h:outputText value="#{itemVenta.saldo}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_fechaSaldo}"
+                          sortBy="#{itemVenta.fechaSaldo}">
+                    <h:outputText value="#{itemVenta.fechaSaldo}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <!--p:column headerText="#{bundle.VentaTitle_observaciones}">
+                    <h:outputText value="#{itemVenta.observaciones}"/>
+                </p:column-->
+            </p:dataTable>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{ventaController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationVenta" id="panelConfirmVenta">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaVenta" oncomplete="confirmationVenta.hide()"
+                                 actionListener="#{ventaController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationVenta.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewVenta" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="ViewVenta.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditVenta" resizable="false" modal="true" showEffect="explode" hideEffect="explode" position="top">
+        <ui:include src="EditVenta.xhtml"></ui:include>
+    </p:dialog>
+</html>

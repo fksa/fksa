@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListAccionista" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <br/>
+            <div style="text-align: right">
+                <p:commandButton id="addButtonAccionista" icon="ui-icon-plusthick"
+                                disabled="#{LoginController.validarPermisos}"
+                                action="#{accionistaController.prepareCreate}"
+                                title="#{bundle.CreateLink}"
+                                update=":panelEditAccionista"
+                                oncomplete="dialogEditAccionista.show()" process="addButtonAccionista"/>    
+            </div>
+            <h:panelGroup>
+                <p:dataTable value="#{accionistaController.items}" var="itemAccionista" id="listaAccionista" rowKey="#{itemAccionista.id}"
+                             selection="#{accionistaController.selected}" selectionMode="single" paginator="true" rows="20"
+                             rowsPerPageTemplate="10,20,50" filteredValue="#{accionistaController.filteredItems}">
+                    <p:ajax event="rowSelect" update=":formViewAccionista:panelViewAccionista" oncomplete="dialogViewAccionista.show()"/>  
+                    <p:column headerText="#{bundle.AccionistaTitle_nombre}"
+                            sortBy="#{itemAccionista.nombre}">
+                        <h:outputText value="#{itemAccionista.nombre}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AccionistaTitle_identificacion}"
+                              sortBy="#{itemAccionista.strIdentificacion}" >
+                        <h:outputText value="#{itemAccionista.strIdentificacion}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AccionistaTitle_ciudad}" 
+                            sortBy="#{itemAccionista.ciudad}">
+                        <h:outputText value="#{itemAccionista.ciudad}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AccionistaTitle_tituloEntregado}"   
+                            sortBy="#{itemAccionista.tituloEntregado}">
+                        <h:outputText value="#{itemAccionista.tituloEntregado}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AccionistaTitle_cartaFirmada}"
+                            sortBy="#{itemAccionista.cartaFirmada}">
+                        <h:outputText value="#{itemAccionista.cartaFirmada}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AccionistaTitle_estado}"
+                            sortBy="#{itemAccionista.estado}">
+                        <h:outputText value="#{itemAccionista.estado}" style="#{ !itemAccionista.validar()?'color: red':''}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{accionistaController.selected}"
+                        header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationAccionista" id="panelConfirmAccionista">
+            <div style="text-align: center">
+            <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaAccionista" oncomplete="confirmationAccionista.hide()"
+                            actionListener="#{accionistaController.destroy}" ajax="false" async="false" />
+            <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationAccionista.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewAccionista" resizable="false" modal="true"
+              showEffect="clip" hideEffect="fold">
+        <ui:include src="ViewAccionista.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditAccionista" resizable="false" modal="true"
+              showEffect="explode" hideEffect="explode">
+        <ui:include src="EditAccionista.xhtml"></ui:include>
+    </p:dialog>
+</html>

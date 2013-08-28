@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditTitulo">
+        <p:panelGrid columns="2" id="panelEditTitulo">
+            <h:outputLabel value="#{bundle.TituloLabel_id}" for="id" />
+            <h:inputText id="id" value="#{tituloController.selected.id}" title="#{bundle.TituloTitle_id}" required="true" requiredMessage="#{bundle.TituloRequiredMessage_id}"/>
+            <h:outputLabel value="#{bundle.TituloLabel_numeroAcciones}" for="numeroAcciones" />
+            <h:inputText id="numeroAcciones" value="#{tituloController.selected.numeroAcciones}" title="#{bundle.TituloTitle_numeroAcciones}" required="true" requiredMessage="#{bundle.TituloRequiredMessage_numeroAcciones}"/>
+            <h:outputLabel value="#{bundle.TituloLabel_tituloNumero}" for="tituloNumero" />
+            <h:inputText id="tituloNumero" value="#{tituloController.selected.tituloNumero}" title="#{bundle.TituloTitle_tituloNumero}" required="true" requiredMessage="#{bundle.TituloRequiredMessage_tituloNumero}"/>
+            <h:outputLabel value="#{bundle.TituloLabel_idAccionista}" for="idAccionista" />
+            <h:selectOneMenu id="idAccionista" value="#{tituloController.selected.idAccionista}" title="#{bundle.TituloTitle_idAccionista}" required="true" requiredMessage="#{bundle.TituloRequiredMessage_idAccionista}">
+                <f:selectItems value="#{accionistaController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+            <h:outputLabel value="#{bundle.TituloLabel_idSas}" for="idSas" />
+            <h:selectOneMenu id="idSas" value="#{tituloController.selected.idSas}" title="#{bundle.TituloTitle_idSas}" required="true" requiredMessage="#{bundle.TituloRequiredMessage_idSas}">
+                <f:selectItems value="#{sasController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonTitulo" icon="ui-icon-disk" oncomplete="dialogEditTitulo.hide()" update=":formListTitulo:listaTitulo :formListTitulo:gro"
+                             actionListener="#{tituloController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

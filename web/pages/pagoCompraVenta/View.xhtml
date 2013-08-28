@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewPagoCompraVenta">
+        <h:panelGrid id="panelViewPagoCompraVenta" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.PagoCompraVentaLabel_id}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoCompraVentaController.selected.id}" title="#{bundle.PagoCompraVentaTitle_id}"/>
+            <h:outputText value="#{bundle.PagoCompraVentaLabel_valor}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoCompraVentaController.selected.valor}" title="#{bundle.PagoCompraVentaTitle_valor}"/>
+            <h:outputText value="#{bundle.PagoCompraVentaLabel_observaciones}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoCompraVentaController.selected.observaciones}" title="#{bundle.PagoCompraVentaTitle_observaciones}"/>
+            <h:outputText value="#{bundle.PagoCompraVentaLabel_idCompra}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoCompraVentaController.selected.idCompra}" title="#{bundle.PagoCompraVentaTitle_idCompra}"/>
+            <h:outputText value="#{bundle.PagoCompraVentaLabel_idVenta}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{pagoCompraVentaController.selected.idVenta}" title="#{bundle.PagoCompraVentaTitle_idVenta}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

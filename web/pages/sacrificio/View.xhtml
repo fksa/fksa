@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewSacrificio">
+        <h:panelGrid id="panelViewSacrificio" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.SacrificioLabel_id}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sacrificioController.selected.id}" title="#{bundle.SacrificioTitle_id}"/>
+            <h:outputText value="#{bundle.SacrificioLabel_pesoSacrificio}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sacrificioController.selected.pesoSacrificio}" title="#{bundle.SacrificioTitle_pesoSacrificio}"/>
+            <h:outputText value="#{bundle.SacrificioLabel_pesoCanalCaliente}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sacrificioController.selected.pesoCanalCaliente}" title="#{bundle.SacrificioTitle_pesoCanalCaliente}"/>
+            <h:outputText value="#{bundle.SacrificioLabel_pesoVisceras}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sacrificioController.selected.pesoVisceras}" title="#{bundle.SacrificioTitle_pesoVisceras}"/>
+            <h:outputText value="#{bundle.SacrificioLabel_pesoPiel}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sacrificioController.selected.pesoPiel}" title="#{bundle.SacrificioTitle_pesoPiel}"/>
+            <h:outputText value="#{bundle.SacrificioLabel_pesoSebo}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sacrificioController.selected.pesoSebo}" title="#{bundle.SacrificioTitle_pesoSebo}"/>
+            <h:outputText value="#{bundle.SacrificioLabel_pesoCanalFrio}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sacrificioController.selected.pesoCanalFrio}" title="#{bundle.SacrificioTitle_pesoCanalFrio}"/>
+            <h:outputText value="#{bundle.SacrificioLabel_pesoCanalEntrega}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sacrificioController.selected.pesoCanalEntrega}" title="#{bundle.SacrificioTitle_pesoCanalEntrega}"/>
+            <h:outputText value="#{bundle.SacrificioLabel_observaciones}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sacrificioController.selected.observaciones}" title="#{bundle.SacrificioTitle_observaciones}"/>
+            <h:outputText value="#{bundle.SacrificioLabel_animal}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{sacrificioController.selected.animal}" title="#{bundle.SacrificioTitle_animal}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

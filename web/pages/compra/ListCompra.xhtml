@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListCompra" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <div style="text-align: right">
+                <p:commandButton id="addButtonCompra" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{compraController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":panelEditCompra"
+                                 oncomplete="dialogEditCompra.show()" process="addButtonCompra"/>    
+            </div>
+            <p:contextMenu for="listaCompra">  
+                <p:menuitem value="#{bundle.ViewLink}" update=":formViewCompra:panelViewCompra" icon="ui-icon-zoomin"
+                            oncomplete="dialogViewCompra.show()"/> 
+                <p:menuitem value="#{bundle.EditLink}" update=":panelEditCompra" icon="ui-icon-pencil"
+                            oncomplete="dialogEditCompra.show()" disabled="#{LoginController.validarPermisos}"/> 
+                <p:menuitem value="#{bundle.DestroyLink}" update=":formListCompra:panelConfirmCompra" icon="ui-icon-closethick"
+                            oncomplete="confirmationCompra.show()" disabled="#{LoginController.validarPermisos}"/> 
+            </p:contextMenu>
+            <p:dataTable value="#{compraController.items}" var="itemCompra" id="listaCompra" 
+                         selection="#{compraController.selected}" selectionMode="single" paginator="true" rows="20" >
+                <p:column headerText="#{bundle.CompraTitle_fechaCompra}" 
+                          sortBy="#{itemCompra.fechaCompra}" >
+                    <h:outputText value="#{itemCompra.fechaCompra}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.CompraTitle_idVendedor}"
+                          sortBy="#{itemCompra.idVendedor.nombre}">
+                    <h:outputText value="#{itemCompra.idVendedor.nombre}"/>
+                </p:column>
+                <p:column headerText="#{bundle.CompraTitle_valor}" 
+                          sortBy="#{itemCompra.valor}" >
+                    <h:outputText value="#{itemCompra.valor}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.CompraTitle_saldo}"
+                          sortBy="#{itemCompra.saldo}">
+                    <h:outputText value="#{itemCompra.saldo}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.CompraTitle_fechaSaldo}"
+                          sortBy="#{itemCompra.fechaSaldo}">
+                    <h:outputText value="#{itemCompra.fechaSaldo}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <!--p:column headerText="#{bundle.CompraTitle_observaciones}">
+                    <h:outputText value="#{itemCompra.observaciones}"/>
+                </p:column-->
+            </p:dataTable>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{compraController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationCompra" id="panelConfirmCompra">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaCompra gro" oncomplete="confirmationCompra.hide()"
+                                 actionListener="#{compraController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationCompra.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewCompra" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="ViewCompra.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditCompra" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="EditCompra.xhtml"></ui:include>
+    </p:dialog>
+</html>

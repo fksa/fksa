@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <p:panelGrid columns="2" id="panelEditAccionista" style="width:100%">
+        <h:outputLabel value="#{bundle.AccionistaLabel_nombre}" for="nombre" />
+        <h:inputText style="width:100%" id="nombre" value="#{accionistaController.selected.nombre}" title="#{bundle.AccionistaTitle_nombre}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_nombre}"/>
+        <h:outputLabel value="#{bundle.AccionistaLabel_tipoIdentificacion}" for="tipoIdentificacion" />
+        <h:selectOneMenu id="tipoIdentificacion" value="#{accionistaController.selected.tipoIdentificacion}" title="#{bundle.AccionistaTitle_tipoIdentificacion}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_tipoIdentificacion}">
+            <f:selectItems value="#{accionistaController.tiposIdentificacion}"/>
+        </h:selectOneMenu>
+        <h:outputLabel value="#{bundle.AccionistaLabel_identificacion}" for="identificacion" />
+        <h:inputText style="width:100%" id="identificacion" value="#{accionistaController.selected.identificacion}" title="#{bundle.AccionistaTitle_identificacion}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_identificacion}"/>
+        <h:outputLabel value="#{bundle.AccionistaLabel_lugarExpedicion}" for="lugarExpedicion" />
+        <h:inputText style="width:100%" id="lugarExpedicion" value="#{accionistaController.selected.lugarExpedicion}" title="#{bundle.AccionistaTitle_lugarExpedicion}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_lugarExpedicion}"/>
+        <h:outputLabel value="#{bundle.AccionistaLabel_telefono}" for="telefono" />
+        <h:inputText style="width:100%" id="telefono" value="#{accionistaController.selected.telefono}" title="#{bundle.AccionistaTitle_telefono}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_telefono}"/>
+        <h:outputLabel value="#{bundle.AccionistaLabel_telefono2}" for="telefono2" />
+        <h:inputText style="width:100%" id="telefono2" value="#{accionistaController.selected.telefono2}" title="#{bundle.AccionistaTitle_telefono2}" />
+        <h:outputLabel value="#{bundle.AccionistaLabel_departamento}" for="departamento" />
+        <h:inputText style="width:100%" id="departamento" value="#{accionistaController.selected.departamento}" title="#{bundle.AccionistaTitle_departamento}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_departamento}"/>
+        <h:outputLabel value="#{bundle.AccionistaLabel_ciudad}" for="ciudad" />
+        <h:inputText style="width:100%" id="ciudad" value="#{accionistaController.selected.ciudad}" title="#{bundle.AccionistaTitle_ciudad}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_ciudad}"/>
+        <h:outputLabel value="#{bundle.AccionistaLabel_direccion}" for="direccion" />
+        <h:inputText style="width:100%" id="direccion" value="#{accionistaController.selected.direccion}" title="#{bundle.AccionistaTitle_direccion}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_direccion}"/>
+        <h:outputLabel value="#{bundle.AccionistaLabel_vereda}" for="vereda" />
+        <h:inputText style="width:100%" id="vereda" value="#{accionistaController.selected.vereda}" title="#{bundle.AccionistaTitle_vereda}" />
+        <h:outputLabel value="#{bundle.AccionistaLabel_tituloEntregado}" for="tituloEntregado" />
+        <h:selectOneMenu id="tituloEntregado" value="#{accionistaController.selected.tituloEntregado}" title="#{bundle.AccionistaTitle_tituloEntregado}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_tituloEntregado}">
+            <f:selectItems value="#{accionistaController.tituloOptions}"/>
+        </h:selectOneMenu>
+        <h:outputLabel value="#{bundle.AccionistaLabel_cartaFirmada}" for="cartaFirmada" />
+        <h:selectOneMenu id="cartaFirmada" value="#{accionistaController.selected.cartaFirmada}" title="#{bundle.AccionistaTitle_cartaFirmada}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_cartaFirmada}">
+            <f:selectItems value="#{accionistaController.tituloOptions}"/>
+        </h:selectOneMenu>
+        <h:outputLabel value="#{bundle.AccionistaLabel_estado}" for="estado" />
+        <h:selectOneMenu id="estado" value="#{accionistaController.selected.estado}" title="#{bundle.AccionistaTitle_estado}" required="true" requiredMessage="#{bundle.AccionistaRequiredMessage_estado}">
+            <f:selectItems value="#{accionistaController.estadoOptions}"/>
+        </h:selectOneMenu>
+    </p:panelGrid>
+    <br/>
+</html>

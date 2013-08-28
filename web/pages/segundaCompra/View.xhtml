@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formView">
+        <h:panelGrid id="panelView" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.SegundaCompraLabel_fecha}" title="#{bundle.SegundaCompraTitle_fecha}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{segundaCompraController.selected.fecha}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            <h:outputText value="#{bundle.SegundaCompraLabel_numeroConsignacion}" title="#{bundle.SegundaCompraTitle_numeroConsignacion}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{segundaCompraController.selected.numeroConsignacion}"/>
+            <h:outputText value="#{bundle.SegundaCompraLabel_valor}" title="#{bundle.SegundaCompraTitle_valor}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{segundaCompraController.selected.valor}">
+                <f:convertNumber pattern="$ ###,###,###"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.SegundaCompraLabel_cuenta}" title="#{bundle.SegundaCompraTitle_cuenta}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{segundaCompraController.selected.cuenta}"/>
+            <h:outputText value="#{bundle.SegundaCompraLabel_descuentoBanco}" title="#{bundle.SegundaCompraTitle_descuentoBanco}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{segundaCompraController.selected.descuentoBanco}">
+                <f:convertNumber pattern="$ ##,###"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.SegundaCompraLabel_idAccionista}" title="#{bundle.SegundaCompraTitle_idAccionista}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{segundaCompraController.selected.idAccionista.nombre}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{segundaCompraController.selected.idAccionista.tipoIdentificacion} #{segundaCompraController.selected.idAccionista.identificacion}"/>
+            <h:outputText value="#{bundle.SegundaCompraLabel_idSas}" title="#{bundle.SegundaCompraTitle_idSas}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{segundaCompraController.selected.idSas.nombre}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

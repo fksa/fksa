@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListSacrificio" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <br/>
+            <div style="text-align: right">
+                <p:commandButton id="addButtonSacrificio" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{sacrificioController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":formEditSacrificio:panelEditSacrificio"
+                                 oncomplete="dialogEditSacrificio.show()" process="addButtonSacrificio"/>    
+            </div>
+            <h:outputText escape="false" value="#{bundle.Empty}" rendered="#{sacrificioController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{sacrificioController.items.rowCount > 0}">
+                <p:contextMenu for="listaSacrificio">  
+                    <p:menuitem value="#{bundle.ViewLink}" update=":formViewSacrificio:panelViewSacrificio" icon="ui-icon-zoomin"
+                                oncomplete="dialogViewSacrificio.show()"/> 
+                    <p:menuitem value="#{bundle.EditLink}" update=":formEditSacrificio:panelEditSacrificio" icon="ui-icon-pencil"
+                                oncomplete="dialogEditSacrificio.show()" disabled="#{LoginController.validarPermisos}"/> 
+                    <p:menuitem value="#{bundle.DestroyLink}" update=":formListSacrificio:panelConfirmSacrificio" icon="ui-icon-closethick"
+                                oncomplete="confirmationSacrificio.show()" disabled="#{LoginController.validarPermisos}"/> 
+                </p:contextMenu>
+                <p:dataTable value="#{sacrificioController.items}" var="itemSacrificio" id="listaSacrificio" rowKey="#{itemSacrificio.id}" 
+                             selection="#{sacrificioController.selected}" selectionMode="single" paginator="true" rows="20" >
+                    <p:column headerText="#{bundle.SacrificioTitle_id}" filterBy="#{itemSacrificio.id}"
+                              sortBy="#{itemSacrificio.id}" id="idFilter">
+                        <h:outputText value="#{itemSacrificio.id}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.SacrificioTitle_pesoSacrificio}" filterBy="#{itemSacrificio.pesoSacrificio}"
+                              sortBy="#{itemSacrificio.pesoSacrificio}" id="pesoSacrificioFilter">
+                        <h:outputText value="#{itemSacrificio.pesoSacrificio}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.SacrificioTitle_pesoCanalCaliente}" filterBy="#{itemSacrificio.pesoCanalCaliente}"
+                              sortBy="#{itemSacrificio.pesoCanalCaliente}" id="pesoCanalCalienteFilter">
+                        <h:outputText value="#{itemSacrificio.pesoCanalCaliente}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.SacrificioTitle_pesoVisceras}" filterBy="#{itemSacrificio.pesoVisceras}"
+                              sortBy="#{itemSacrificio.pesoVisceras}" id="pesoViscerasFilter">
+                        <h:outputText value="#{itemSacrificio.pesoVisceras}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.SacrificioTitle_pesoPiel}" filterBy="#{itemSacrificio.pesoPiel}"
+                              sortBy="#{itemSacrificio.pesoPiel}" id="pesoPielFilter">
+                        <h:outputText value="#{itemSacrificio.pesoPiel}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.SacrificioTitle_pesoSebo}" filterBy="#{itemSacrificio.pesoSebo}"
+                              sortBy="#{itemSacrificio.pesoSebo}" id="pesoSeboFilter">
+                        <h:outputText value="#{itemSacrificio.pesoSebo}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.SacrificioTitle_pesoCanalFrio}" filterBy="#{itemSacrificio.pesoCanalFrio}"
+                              sortBy="#{itemSacrificio.pesoCanalFrio}" id="pesoCanalFrioFilter">
+                        <h:outputText value="#{itemSacrificio.pesoCanalFrio}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.SacrificioTitle_pesoCanalEntrega}" filterBy="#{itemSacrificio.pesoCanalEntrega}"
+                              sortBy="#{itemSacrificio.pesoCanalEntrega}" id="pesoCanalEntregaFilter">
+                        <h:outputText value="#{itemSacrificio.pesoCanalEntrega}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.SacrificioTitle_observaciones}" filterBy="#{itemSacrificio.observaciones}"
+                              sortBy="#{itemSacrificio.observaciones}" id="observacionesFilter">
+                        <h:outputText value="#{itemSacrificio.observaciones}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.SacrificioTitle_animal}" filterBy="#{itemSacrificio.animal}"
+                              sortBy="#{itemSacrificio.animal}" id="animalFilter">
+                        <h:outputText value="#{itemSacrificio.animal}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{sacrificioController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationSacrificio" id="panelConfirmSacrificio">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaSacrificio" oncomplete="confirmationSacrificio.hide()"
+                                 actionListener="#{sacrificioController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationSacrificio.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewSacrificio" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="ViewSacrificio.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditSacrificio" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="EditSacrificio.xhtml"></ui:include>
+    </p:dialog>
+</html>

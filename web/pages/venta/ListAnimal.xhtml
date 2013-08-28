@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListAnimal" styleClass="jsfcrud_list_form">
+        <p:tabView id="tabAnimal" effect="blind" effectDuration="normal">  
+            <p:tab title="Animales Venta" >  
+                <p:dataTable value="#{ventaController.selected.animalList}" var="itemAnimal" id="listaAnimal" paginator="true" rows="10" editable="true" >
+                    <p:ajax event="rowEdit" listener="#{ventaController.saveAnimal}"
+                                    update=":formEditVenta:mensaje :formListVenta:listaVenta
+                                            :formEditVenta:tabVenta:panelEditVenta2
+                                            :formEditVenta:tabVenta:nroAnimales
+                                            :formEditVenta:tabVenta:vlorAnimales
+                                            :formEditVenta:tabVenta:formListAnimal:tabAnimal:listaAnimal"  
+                                     process="@this"/>    
+                    <p:ajax event="rowEditCancel" update=":formEditVenta:tabVenta:formListAnimal:tabAnimal:listaAnimal" />  
+                    <p:column headerText="#{bundle.AnimalTitle_numeroFksa}">
+                        <h:outputText value="#{itemAnimal.numeroFksa}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_tipo}">
+                        <h:outputText value="#{itemAnimal.idTipo.nombre}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_pesoVenta}">
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{itemAnimal.pesoVenta}"/>
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{itemAnimal.pesoVenta}" style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_valorKgVenta}">
+                        <p:cellEditor>  
+                            <f:facet name="output">  
+                                <h:outputText value="#{itemAnimal.valorKgVenta}">
+                                    <f:convertNumber integerOnly="true"/>
+                                </h:outputText>
+                            </f:facet>  
+                            <f:facet name="input">  
+                                <p:inputText value="#{itemAnimal.valorKgVenta}" style="width:100%"/>  
+                            </f:facet>  
+                        </p:cellEditor>  
+                    </p:column>
+                    <p:column headerText="#{bundle.AnimalTitle_valorTotalVenta}">
+                        <h:outputText value="#{itemAnimal.valorTotalVenta}">
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </p:column>
+                    <p:column style="width:6%">  
+                        <p:rowEditor/>
+                    </p:column>
+                    <p:column style="width:6%" headerText="&nbsp;" >
+                      <p:commandLink id="delButtonAnimal" styleClass="ui-icon ui-icon-close"
+                                    disabled="#{LoginController.validarPermisos}"
+                                    action="#{ventaController.removeAnimal(itemAnimal)}"
+                                    title="#{bundle.DestroyLink}"
+                                    update=":formEditVenta:mensaje :formListVenta:listaVenta
+                                            :formEditVenta:tabVenta:panelEditVenta2
+                                            :formEditVenta:tabVenta:nroAnimales
+                                            :formEditVenta:tabVenta:vlorAnimales
+                                            :formEditVenta:tabVenta:formListAnimal:tabAnimal:listaAnimal  
+                                            :formEditVenta:tabVenta:formListAnimal:tabAnimal:listaAddAnimal"  
+                                     process="@this"/>    
+                    </p:column>
+                </p:dataTable>
+            </p:tab>
+            <p:tab title="Animales Disponibles">  
+                <ui:include src="ListAddAnimal.xhtml"></ui:include>
+            </p:tab>
+        </p:tabView>
+    </h:form>
+</html>

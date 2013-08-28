@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListCostoVenta" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <br/>
+            <div style="text-align: right">
+                <p:commandButton id="addButtonCostoVenta" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{costoVentaController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":formEditCostoVenta:panelEditCostoVenta"
+                                 oncomplete="dialogEditCostoVenta.show()" process="addButtonCostoVenta"/>    
+            </div>
+            <h:outputText escape="false" value="#{bundle.Empty}" rendered="#{costoVentaController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{costoVentaController.items.rowCount > 0}">
+                <p:contextMenu for="listaCostoVenta">  
+                    <p:menuitem value="#{bundle.ViewLink}" update=":formViewCostoVenta:panelViewCostoVenta" icon="ui-icon-zoomin"
+                                oncomplete="dialogViewCostoVenta.show()"/> 
+                    <p:menuitem value="#{bundle.EditLink}" update=":formEditCostoVenta:panelEditCostoVenta" icon="ui-icon-pencil"
+                                oncomplete="dialogEditCostoVenta.show()" disabled="#{LoginController.validarPermisos}"/> 
+                    <p:menuitem value="#{bundle.DestroyLink}" update=":formListCostoVenta:panelConfirmCostoVenta" icon="ui-icon-closethick"
+                                oncomplete="confirmationCostoVenta.show()" disabled="#{LoginController.validarPermisos}"/> 
+                </p:contextMenu>
+                <p:dataTable value="#{costoVentaController.items}" var="itemCostoVenta" id="listaCostoVenta" rowKey="#{itemCostoVenta.id}" 
+                             selection="#{costoVentaController.selected}" selectionMode="single" paginator="true" rows="20" >
+                    <p:column headerText="#{bundle.CostoVentaTitle_id}" filterBy="#{itemCostoVenta.id}"
+                              sortBy="#{itemCostoVenta.id}" id="idFilter">
+                        <h:outputText value="#{itemCostoVenta.id}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.CostoVentaTitle_valorUnitario}" filterBy="#{itemCostoVenta.valorUnitario}"
+                              sortBy="#{itemCostoVenta.valorUnitario}" id="valorUnitarioFilter">
+                        <h:outputText value="#{itemCostoVenta.valorUnitario}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.CostoVentaTitle_unidades}" filterBy="#{itemCostoVenta.unidades}"
+                              sortBy="#{itemCostoVenta.unidades}" id="unidadesFilter">
+                        <h:outputText value="#{itemCostoVenta.unidades}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.CostoVentaTitle_valorTotal}" filterBy="#{itemCostoVenta.valorTotal}"
+                              sortBy="#{itemCostoVenta.valorTotal}" id="valorTotalFilter">
+                        <h:outputText value="#{itemCostoVenta.valorTotal}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.CostoVentaTitle_observaciones}" filterBy="#{itemCostoVenta.observaciones}"
+                              sortBy="#{itemCostoVenta.observaciones}" id="observacionesFilter">
+                        <h:outputText value="#{itemCostoVenta.observaciones}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.CostoVentaTitle_idTipo}" filterBy="#{itemCostoVenta.idTipo}"
+                              sortBy="#{itemCostoVenta.idTipo}" id="idTipoFilter">
+                        <h:outputText value="#{itemCostoVenta.idTipo}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.CostoVentaTitle_idVenta}" filterBy="#{itemCostoVenta.idVenta}"
+                              sortBy="#{itemCostoVenta.idVenta}" id="idVentaFilter">
+                        <h:outputText value="#{itemCostoVenta.idVenta}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{costoVentaController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationCostoVenta" id="panelConfirmCostoVenta">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaCostoVenta" oncomplete="confirmationCostoVenta.hide()"
+                                 actionListener="#{costoVentaController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationCostoVenta.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewCostoVenta" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="ViewCostoVenta.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditCostoVenta" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="EditCostoVenta.xhtml"></ui:include>
+    </p:dialog>
+</html>

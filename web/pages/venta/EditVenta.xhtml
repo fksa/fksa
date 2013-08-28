@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <p:panel id="panelEditVenta">
+        <f:facet name="header">
+            <h:outputText value="#{ventaController.selected.idComprador == null ? 'Nueva Compra' : ventaController.selected.idComprador.nombre} :: Semana: #{ventaController.selected.semana} :: "/>
+            <h:outputText value="#{ventaController.selected.fechaVenta}"><f:convertDateTime pattern=" (MM/dd/yyyy)" /></h:outputText>
+        </f:facet>  
+    <h:form id="formEditVenta">
+        <p:growl id="mensaje" showDetail="true"/>
+        <p:tabView id="tabVenta" effect="blind" effectDuration="normal">
+            <p:tab title="Informaci&oacute;n">  
+                <p:panelGrid columns="2" id="panelEditVenta2">
+                    <h:outputLabel value="#{bundle.VentaLabel_idComprador}" for="idComprador" />
+                    <h:selectOneMenu id="idComprador" value="#{ventaController.selected.idComprador}" title="#{bundle.VentaTitle_idComprador}" required="true" requiredMessage="#{bundle.VentaRequiredMessage_idComprador}">
+                        <f:selectItems value="#{compradorController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.VentaLabel_fechaVenta}" for="fechaVenta" />
+                    <p:calendar value="#{ventaController.selected.fechaVenta}" id="fechaVenta" title="#{bundle.VentaTitle_fechaVenta}" required="true" requiredMessage="#{bundle.VentaRequiredMessage_fechaVenta}"/>  
+                    <h:outputLabel value="#{bundle.VentaLabel_fechaSaldo}" for="fechaSaldo" />
+                    <p:calendar value="#{ventaController.selected.fechaSaldo}" id="fechaSaldo" title="#{bundle.VentaTitle_fechaSaldo}" required="true" requiredMessage="#{bundle.VentaRequiredMessage_fechaSaldo}"/>  
+                    <h:outputLabel value="#{bundle.VentaLabel_tipo}" for="tipo" />
+                    <h:selectOneMenu id="tipo" value="#{ventaController.selected.tipo}" title="#{bundle.VentaTitle_tipo}" required="true" requiredMessage="#{bundle.VentaRequiredMessage_tipo}">
+                        <f:selectItems value="#{ventaController.tipoVenta}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.VentaLabel_totalVenta}" for="totalVenta" />
+                    <h:outputText id="totalVenta" value="#{ventaController.selected.totalVenta}" title="#{bundle.VentaTitle_totalVenta}" required="true" requiredMessage="#{bundle.VentaRequiredMessage_totalVenta}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.VentaLabel_totalCosto}" for="totalCosto" />
+                    <h:outputText id="totalCosto" value="#{ventaController.selected.totalCosto}" title="#{bundle.VentaTitle_totalCosto}" required="true" requiredMessage="#{bundle.VentaRequiredMessage_totalCosto}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.VentaLabel_utilidad}" for="utilidad" />
+                    <h:outputText id="utilidad" value="#{ventaController.selected.utilidad}" title="#{bundle.VentaTitle_utilidad}" required="true" requiredMessage="#{bundle.VentaRequiredMessage_utilidad}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.VentaLabel_saldo}" for="saldo" />
+                    <h:outputText id="saldo" value="#{ventaController.selected.saldo}" title="#{bundle.VentaTitle_saldo}" required="true" requiredMessage="#{bundle.VentaRequiredMessage_saldo}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                    <h:outputLabel value="#{bundle.VentaLabel_observaciones}" for="observaciones" />
+                    <h:inputTextarea rows="4" cols="25" id="observaciones" value="#{ventaController.selected.observaciones}" title="#{bundle.VentaTitle_observaciones}" />
+                </p:panelGrid>
+                <div style="text-align: center">
+                    <p:commandButton id="saveButtonVenta" icon="ui-icon-disk" 
+                                    update=":formListVenta:listaVenta :formListVenta:gro :panelEditVenta"
+                                    actionListener="#{ventaController.update}" value="#{bundle.SaveLink}" title="#{bundle.SaveLink}"/>
+                </div>
+            </p:tab>
+            <p:tab>  
+                <f:facet name="title">
+                    <h:outputText id="nroAnimales" value=" Animales (#{ventaController.selected.animalList.size()}) $ "/>
+                    <h:outputText id="vlorAnimales" value="#{ventaController.selected.costoAnimales}"><f:convertNumber integerOnly="true"/></h:outputText>
+                </f:facet>  
+                <ui:include src="ListAnimal.xhtml"></ui:include>
+            </p:tab>
+            <p:tab>  
+                <f:facet name="title">
+                    <h:outputText value="Pagos: $ "/>
+                    <h:outputText id="vlorPagos" value="#{ventaController.selected.totalVenta - ventaController.selected.saldo}"><f:convertNumber integerOnly="true"/></h:outputText>
+                </f:facet>  
+                <ui:include src="ListPagoCompraVenta.xhtml"></ui:include>
+            </p:tab>
+            <p:tab>  
+                <f:facet name="title">
+                    <h:outputText value="Costos: $ "/>
+                    <h:outputText id="vlorCostos" value="#{ventaController.selected.totalCosto}"><f:convertNumber integerOnly="true"/></h:outputText>
+                </f:facet>  
+                <ui:include src="ListCostoVenta.xhtml"></ui:include>
+            </p:tab>
+            <p:tab>  
+                <f:facet name="title">
+                    <h:outputText value="Productos: $ "/>
+                    <h:outputText id="vlorProductos" value="#{ventaController.selected.totalVenta}"><f:convertNumber integerOnly="true"/></h:outputText>
+                </f:facet>  
+                <ui:include src="ListProductoVenta.xhtml"></ui:include>
+            </p:tab>
+        </p:tabView>
+    </h:form>
+    </p:panel>
+</html>

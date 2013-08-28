@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListGrupoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form prependId="false">
+                <p:panel header="#{bundle.ListGrupoTitle}">
+                    <br/>
+                    <p:commandButton disabled="#{LoginController.validarPermisos}" value="#{bundle.ListGrupoCreateLink}" action="#{grupoController.prepareCreate}"
+                                     image="ui-icon ui-icon-plusthick" title="#{bundle.ListGrupoCreateLink}" ajax="false" />
+                    <br/>
+                    <br/>
+                    <h:outputText escape="false" value="#{bundle.ListGrupoEmpty}" rendered="#{grupoController.items.rowCount == 0}"/>
+                    <h:panelGroup rendered="#{grupoController.items.rowCount > 0}">
+                        <p:dataTable value="#{grupoController.items}" var="item" id="lista"
+                                     paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown} {CurrentPageReport}"
+                                     paginator="true" rows="10" rowsPerPageTemplate="10,20,50">
+                            <p:column headerText="#{bundle.GrupoTitle_nombre}">
+                                <h:outputText value="#{item.nombre}"/>
+                            </p:column>
+                            <p:column headerText="#{bundle.GrupoTitle_descripcion}">
+                                <h:outputText value="#{item.descripcion}"/>
+                            </p:column>
+                            <p:column headerText="&nbsp;">
+                                <p:commandButton action="#{grupoController.prepareView}" title="#{bundle.GrupoViewLink}"
+                                                 image="ui-icon ui-icon-zoomin" ajax="false"/>
+                                <p:commandButton action="#{grupoController.prepareEdit}" disabled="#{LoginController.validarPermisos}"
+                                                 image="ui-icon ui-icon-pencil" title="#{bundle.ListGrupoEditLink}" ajax="false">
+                                </p:commandButton>
+                                <p:commandButton oncomplete="confirmation.show()" disabled="#{LoginController.validarPermisos}"
+                                                 image="ui-icon ui-icon-closethick" title="#{bundle.ListGrupoDestroyLink}">
+                                    <f:setPropertyActionListener value="#{item}" target="#{grupoController.selected}" />
+                                </p:commandButton>
+                            </p:column>
+                        </p:dataTable>
+                    </h:panelGroup>
+                    <p:confirmDialog message="#{bundle.Confirmation_message}" hideEffect="explode" modal="true"
+                                     header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmation">
+                        <div style="text-align: center">
+                        <p:commandButton value="#{bundle.Confirmation_aceptar}" update="lista" oncomplete="confirmation.hide()"
+                                         actionListener="#{grupoController.destroy}" ajax="false" async="false" />
+                        <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmation.hide()" type="button" />
+                        </div>
+                    </p:confirmDialog>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

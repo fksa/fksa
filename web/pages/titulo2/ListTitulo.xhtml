@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListTitulo" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <br/>
+            <div style="text-align: right">
+                <p:commandButton id="addButtonTitulo" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{tituloController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":formEditTitulo:panelEditTitulo"
+                                 oncomplete="dialogEditTitulo.show()" process="addButtonTitulo"/>    
+            </div>
+            <h:outputText escape="false" value="#{bundle.Empty}" rendered="#{tituloController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{tituloController.items.rowCount > 0}">
+                <p:contextMenu for="listaTitulo">  
+                    <p:menuitem value="#{bundle.ViewLink}" update=":formViewTitulo:panelViewTitulo" icon="ui-icon-zoomin"
+                                oncomplete="dialogViewTitulo.show()"/> 
+                    <p:menuitem value="#{bundle.EditLink}" update=":formEditTitulo:panelEditTitulo" icon="ui-icon-pencil"
+                                oncomplete="dialogEditTitulo.show()" disabled="#{LoginController.validarPermisos}"/> 
+                    <p:menuitem value="#{bundle.DestroyLink}" update=":formListTitulo:panelConfirmTitulo" icon="ui-icon-closethick"
+                                oncomplete="confirmationTitulo.show()" disabled="#{LoginController.validarPermisos}"/> 
+                </p:contextMenu>
+                <p:dataTable value="#{tituloController.items}" var="itemTitulo" id="listaTitulo"  
+                             selection="#{tituloController.selected}" selectionMode="single" paginator="true" rows="20" >
+                    <p:column headerText="#{bundle.TituloTitle_id}" 
+                              sortBy="#{itemTitulo.id}" id="idFilter">
+                        <h:outputText value="#{itemTitulo.id}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.TituloTitle_numeroAcciones}" 
+                              sortBy="#{itemTitulo.numeroAcciones}" id="numeroAccionesFilter">
+                        <h:outputText value="#{itemTitulo.numeroAcciones}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.TituloTitle_tituloNumero}" 
+                              sortBy="#{itemTitulo.tituloNumero}" id="tituloNumeroFilter">
+                        <h:outputText value="#{itemTitulo.tituloNumero}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.TituloTitle_idAccionista}" 
+                              sortBy="#{itemTitulo.idAccionista}" id="idAccionistaFilter">
+                        <h:outputText value="#{itemTitulo.idAccionista}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.TituloTitle_idSas}" 
+                              sortBy="#{itemTitulo.idSas}" id="idSasFilter">
+                        <h:outputText value="#{itemTitulo.idSas}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{tituloController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationTitulo" id="panelConfirmTitulo">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaTitulo" oncomplete="confirmationTitulo.hide()"
+                                 actionListener="#{tituloController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationTitulo.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewTitulo" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="View.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditTitulo" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="Edit.xhtml"></ui:include>
+    </p:dialog>
+</html>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListProductoVenta" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <br/>
+            <div style="text-align: right">
+                <p:commandButton id="addButtonProductoVenta" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{productoVentaController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":formEditProductoVenta:panelEditProductoVenta"
+                                 oncomplete="dialogEditProductoVenta.show()" process="addButtonProductoVenta"/>    
+            </div>
+            <h:outputText escape="false" value="#{bundle.Empty}" rendered="#{productoVentaController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{productoVentaController.items.rowCount > 0}">
+                <p:contextMenu for="listaProductoVenta">  
+                    <p:menuitem value="#{bundle.ViewLink}" update=":formViewProductoVenta:panelViewProductoVenta" icon="ui-icon-zoomin"
+                                oncomplete="dialogViewProductoVenta.show()"/> 
+                    <p:menuitem value="#{bundle.EditLink}" update=":formEditProductoVenta:panelEditProductoVenta" icon="ui-icon-pencil"
+                                oncomplete="dialogEditProductoVenta.show()" disabled="#{LoginController.validarPermisos}"/> 
+                    <p:menuitem value="#{bundle.DestroyLink}" update=":formListProductoVenta:panelConfirmProductoVenta" icon="ui-icon-closethick"
+                                oncomplete="confirmationProductoVenta.show()" disabled="#{LoginController.validarPermisos}"/> 
+                </p:contextMenu>
+                <p:dataTable value="#{productoVentaController.items}" var="itemProductoVenta" id="listaProductoVenta" rowKey="#{itemProductoVenta.id}" 
+                             selection="#{productoVentaController.selected}" selectionMode="single" paginator="true" rows="20" >
+                    <p:column headerText="#{bundle.ProductoVentaTitle_id}" filterBy="#{itemProductoVenta.id}"
+                              sortBy="#{itemProductoVenta.id}" id="idFilter">
+                        <h:outputText value="#{itemProductoVenta.id}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ProductoVentaTitle_valorUnitario}" filterBy="#{itemProductoVenta.valorUnitario}"
+                              sortBy="#{itemProductoVenta.valorUnitario}" id="valorUnitarioFilter">
+                        <h:outputText value="#{itemProductoVenta.valorUnitario}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ProductoVentaTitle_unidades}" filterBy="#{itemProductoVenta.unidades}"
+                              sortBy="#{itemProductoVenta.unidades}" id="unidadesFilter">
+                        <h:outputText value="#{itemProductoVenta.unidades}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ProductoVentaTitle_valorTotal}" filterBy="#{itemProductoVenta.valorTotal}"
+                              sortBy="#{itemProductoVenta.valorTotal}" id="valorTotalFilter">
+                        <h:outputText value="#{itemProductoVenta.valorTotal}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ProductoVentaTitle_observaciones}" filterBy="#{itemProductoVenta.observaciones}"
+                              sortBy="#{itemProductoVenta.observaciones}" id="observacionesFilter">
+                        <h:outputText value="#{itemProductoVenta.observaciones}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ProductoVentaTitle_idTipo}" filterBy="#{itemProductoVenta.idTipo}"
+                              sortBy="#{itemProductoVenta.idTipo}" id="idTipoFilter">
+                        <h:outputText value="#{itemProductoVenta.idTipo}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.ProductoVentaTitle_idVenta}" filterBy="#{itemProductoVenta.idVenta}"
+                              sortBy="#{itemProductoVenta.idVenta}" id="idVentaFilter">
+                        <h:outputText value="#{itemProductoVenta.idVenta}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{productoVentaController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationProductoVenta" id="panelConfirmProductoVenta">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaProductoVenta" oncomplete="confirmationProductoVenta.hide()"
+                                 actionListener="#{productoVentaController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationProductoVenta.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewProductoVenta" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="ViewProductoVenta.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditProductoVenta" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="EditProductoVenta.xhtml"></ui:include>
+    </p:dialog>
+</html>

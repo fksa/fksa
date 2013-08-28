@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <p:dataTable value="#{accionistaController.selected.contratoSuscripcionList}" var="itemContratoSuscripcion" id="listaContratoSuscripcion">
+        <p:column headerText="#{bundle.ContratoSuscripcionTitle_id}">
+            <h:outputText value="#{itemContratoSuscripcion.id}"/>
+        </p:column>
+        <p:column headerText="#{bundle.ContratoSuscripcionTitle_accionesSuscritas}">
+            <h:outputText value="#{itemContratoSuscripcion.accionesSuscritas}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+        </p:column>
+        <p:column headerText="#{bundle.PagoAccionesTitle_valor} Contrato Suscripci&oacute;n" style="text-align: right">
+            <f:facet name="footer">
+                <h:outputText value="#{accionistaController.selected != null ? accionistaController.selected.totalSuscrito():0}" >
+                    <f:convertNumber integerOnly="true"/>
+                </h:outputText>
+            </f:facet>  
+            <h:outputText value="#{itemContratoSuscripcion.accionesSuscritas*2000}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+        </p:column>
+    </p:dataTable>
+</html>

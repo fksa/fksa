@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateModuloTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:panel header="#{bundle.CreateModuloTitle}">
+                <h:form prependId="false">
+                    <p:commandButton value="#{bundle.ModuloShowAllLink}" action="#{moduloController.prepareList}"
+                                     image="ui-icon ui-icon-arrowreturnthick-1-w" title="Volver" ajax="false" immediate="true">
+                    </p:commandButton>
+                    <br/>
+                    <br/>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.ModuloLabel_nombre}" for="nombre" />
+                        <h:inputText id="nombre" value="#{moduloController.selected.nombre}" title="#{bundle.ModuloTitle_nombre}"
+                                        required="true" requiredMessage="#{bundle.ModuloRequiredMessage_nombre}"/>
+                        <h:outputLabel value="#{bundle.ModuloLabel_url}" for="url" />
+                        <h:inputText id="url" value="#{moduloController.selected.url}" title="#{bundle.ModuloTitle_url}"
+                                        disabled="#{moduloController.sinUrl}" required="true" requiredMessage="#{bundle.ModuloRequiredMessage_url}"/>
+                        <h:outputLabel value="#{bundle.ModuloLabel_permisos}" for="permisos" />
+                        <h:selectOneMenu  disabled="#{moduloController.sinUrl}" id="permisos" value="#{moduloController.selected.permisos}" title="#{bundle.ModuloTitle_permisos}" >
+                            <f:selectItems value="#{moduloController.itemsAvailablePermisos}"/>
+                        </h:selectOneMenu>
+                        <h:outputLabel value="#{bundle.ModuloLabel_nombreGrupoModulo}" for="idGrupoModulo" />
+                        <h:selectOneMenu id="idGrupoModulo" value="#{moduloController.selected.idGrupoModulo}" title="#{bundle.ModuloTitle_nombreGrupoModulo}" >
+                            <f:selectItems value="#{moduloController.itemsAvailableSelectOne}"/>
+                            <p:ajax update="url permisos" listener="#{moduloController.handleGrupoChange}" />
+                        </h:selectOneMenu>
+                    </h:panelGrid>
+                    <br/>
+                    <p:commandButton value="#{bundle.CreateModuloSaveLink}" action="#{moduloController.create}"
+                                     image="ui-icon ui-icon-disk" title="#{bundle.CreateModuloSaveLink}" ajax="false">
+                    </p:commandButton>
+                </h:form>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+
+</html>

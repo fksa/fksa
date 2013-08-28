@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateGrupoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:panel header="#{bundle.CreateGrupoTitle}">
+                <h:form prependId="false">
+                    <p:commandButton value="#{bundle.GrupoShowAllLink}" action="#{grupoController.prepareList}"
+                                     image="ui-icon ui-icon-arrowreturnthick-1-w" title="Volver" ajax="false" immediate="true">
+                    </p:commandButton>
+                    <br/>
+                    <br/>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.GrupoLabel_nombre}" for="nombre" />
+                        <h:inputText size="40" id="nombre" value="#{grupoController.selected.nombre}" title="#{bundle.GrupoTitle_nombre}"
+                                        required="true" requiredMessage="#{bundle.GrupoRequiredMessage_nombre}"/>
+                        <h:outputLabel value="#{bundle.GrupoLabel_descripcion}" for="descripcion" />
+                        <h:inputText size="40" id="descripcion" value="#{grupoController.selected.descripcion}" title="#{bundle.GrupoTitle_descripcion}"
+                                        required="true" requiredMessage="#{bundle.GrupoRequiredMessage_descripcion}"/>
+                    </h:panelGrid>
+                    <br />
+                    <p:commandButton value="#{bundle.CreateGrupoSaveLink}" action="#{grupoController.create}"
+                                     image="ui-icon ui-icon-disk" title="#{bundle.CreateGrupoSaveLink}" ajax="false">
+                    </p:commandButton>
+                </h:form>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+
+</html>

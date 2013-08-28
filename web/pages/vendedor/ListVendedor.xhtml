@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListVendedor" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle} :: Vendedores">
+            <div style="text-align: right">
+                <p:commandButton id="addButtonVendedor" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{vendedorController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":formEditVendedor:panelEditVendedor"
+                                 oncomplete="dialogEditVendedor.show()" process="addButtonVendedor"/>    
+            </div>
+            <p:contextMenu for="listaVendedor">  
+                <p:menuitem value="#{bundle.ViewLink}" update=":formViewVendedor:panelViewVendedor" icon="ui-icon-zoomin"
+                            oncomplete="dialogViewVendedor.show()"/> 
+                <p:menuitem value="#{bundle.EditLink}" update=":formEditVendedor:panelEditVendedor" icon="ui-icon-pencil"
+                            oncomplete="dialogEditVendedor.show()" disabled="#{LoginController.validarPermisos}"/> 
+                <p:menuitem value="#{bundle.DestroyLink}" update=":formListVendedor:panelConfirmVendedor" icon="ui-icon-closethick"
+                            oncomplete="confirmationVendedor.show()" disabled="#{LoginController.validarPermisos}"/> 
+            </p:contextMenu>
+            <p:dataTable value="#{vendedorController.items}" var="itemVendedor" id="listaVendedor" 
+                         selection="#{vendedorController.selected}" selectionMode="single" paginator="true" rows="20" >
+                <p:column headerText="#{bundle.VendedorTitle_rut}"
+                          sortBy="#{itemVendedor.rut}">
+                    <h:outputText value="#{itemVendedor.rut}"/>
+                </p:column>
+                <p:column headerText="#{bundle.VendedorTitle_nombre}"
+                          sortBy="#{itemVendedor.nombre}">
+                    <h:outputText value="#{itemVendedor.nombre}"/>
+                </p:column>
+                <p:column headerText="#{bundle.VendedorTitle_direccion}"
+                          sortBy="#{itemVendedor.direccion}">
+                    <h:outputText value="#{itemVendedor.direccion}"/>
+                </p:column>
+                <p:column headerText="#{bundle.VendedorTitle_ciudad}"
+                          sortBy="#{itemVendedor.ciudad}">
+                    <h:outputText value="#{itemVendedor.ciudad}"/>
+                </p:column>
+                <p:column headerText="#{bundle.VendedorTitle_telefono}"
+                          sortBy="#{itemVendedor.telefono}">
+                    <h:outputText value="#{itemVendedor.telefono}"/>
+                </p:column>
+                <p:column headerText="#{bundle.VendedorTitle_soportes}"
+                          sortBy="#{itemVendedor.soportes}">
+                    <h:outputText value="#{itemVendedor.soportes}"/>
+                </p:column>
+                <p:column headerText="#{bundle.VendedorTitle_estado}"
+                          sortBy="#{itemVendedor.estado}">
+                    <h:outputText value="#{itemVendedor.estado}"/>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{vendedorController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationVendedor" id="panelConfirmVendedor">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaVendedor" oncomplete="confirmationVendedor.hide()"
+                                 actionListener="#{vendedorController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationVendedor.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewVendedor" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="ViewVendedor.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditVendedor" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="EditVendedor.xhtml"></ui:include>
+    </p:dialog>
+</html>

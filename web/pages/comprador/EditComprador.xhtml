@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditComprador">
+        <p:panelGrid columns="2" id="panelEditComprador">
+            <h:outputLabel value="#{bundle.CompradorLabel_rut}" for="rut" />
+            <h:inputText id="rut" value="#{compradorController.selected.rut}" title="#{bundle.CompradorTitle_rut}" required="true" requiredMessage="#{bundle.CompradorRequiredMessage_rut}"/>
+            <h:outputLabel value="#{bundle.CompradorLabel_nombre}" for="nombre" />
+            <h:inputText id="nombre" value="#{compradorController.selected.nombre}" title="#{bundle.CompradorTitle_nombre}" required="true" requiredMessage="#{bundle.CompradorRequiredMessage_nombre}"/>
+            <h:outputLabel value="#{bundle.CompradorLabel_direccion}" for="direccion" />
+            <h:inputText id="direccion" value="#{compradorController.selected.direccion}" title="#{bundle.CompradorTitle_direccion}" required="true" requiredMessage="#{bundle.CompradorRequiredMessage_direccion}"/>
+            <h:outputLabel value="#{bundle.CompradorLabel_ciudad}" for="ciudad" />
+            <h:inputText id="ciudad" value="#{compradorController.selected.ciudad}" title="#{bundle.CompradorTitle_ciudad}" required="true" requiredMessage="#{bundle.CompradorRequiredMessage_ciudad}"/>
+            <h:outputLabel value="#{bundle.CompradorLabel_telefono}" for="telefono" />
+            <h:inputText id="telefono" value="#{compradorController.selected.telefono}" title="#{bundle.CompradorTitle_telefono}" required="true" requiredMessage="#{bundle.CompradorRequiredMessage_telefono}"/>
+            <h:outputLabel value="#{bundle.CompradorLabel_soportes}" for="soportes" />
+            <h:selectOneMenu id="soportes" value="#{compradorController.selected.soportes}" title="#{bundle.CompradorTitle_soportes}" required="true" requiredMessage="#{bundle.CompradorRequiredMessage_soportes}">
+                <f:selectItems value="#{accionistaController.tituloOptions}"/>
+            </h:selectOneMenu>
+            <h:outputLabel value="#{bundle.CompradorLabel_estado}" for="estado" />
+            <h:selectOneMenu id="estado" value="#{compradorController.selected.estado}" title="#{bundle.CompradorTitle_estado}" required="true" requiredMessage="#{bundle.CompradorRequiredMessage_estado}">
+                <f:selectItems value="#{accionistaController.estadoOptions}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonComprador" icon="ui-icon-disk" oncomplete="dialogEditComprador.hide()" update=":formListComprador:listaComprador :formListComprador:gro"
+                             actionListener="#{compradorController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

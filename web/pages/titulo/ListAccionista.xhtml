@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListAccionista" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <br/>
+            <div style="text-align: right">
+                <p:commandButton id="addButtonAccionista" icon="ui-icon-plusthick"
+                                disabled="#{LoginController.validarPermisos }"
+                                action="#{accionistaController.prepareCreate}"
+                                title="#{bundle.CreateLink}"
+                                update=":panelEditAccionista"
+                                oncomplete="dialogEditAccionista.show()" process="addButtonAccionista"/>    
+            </div>
+            <h:panelGroup>
+                <p:dataTable value="#{accionistaController.items}" var="itemAccionista" id="listaAccionista" rowKey="#{itemAccionista.id}"
+                             selection="#{accionistaController.selected}" selectionMode="single" paginator="true" rows="20"
+                             rowsPerPageTemplate="10,20,50" filteredValue="#{accionistaController.filteredItems}">
+                    <p:ajax event="rowSelect" action="#{accionistaController.prepareEdit()}" update=":panelEditAccionista"
+                            oncomplete="dialogEditAccionista.show()" disabled="#{LoginController.validarPermisos}"/>  
+                    <p:column headerText="#{bundle.AccionistaTitle_nombre}" filterBy="#{itemAccionista.nombre}"
+                            sortBy="#{itemAccionista.nombre}" id="nombreFilter" filterMatchMode="contains">
+                        <h:outputText value="#{itemAccionista.nombre}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AccionistaTitle_identificacion}" filterBy="#{itemAccionista.strIdentificacion}"
+                              sortBy="#{itemAccionista.strIdentificacion}" id="identificacionFilter" filterMatchMode="contains">
+                        <h:outputText value="#{itemAccionista.strIdentificacion}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AccionistaTitle_ciudad}" 
+                            sortBy="#{itemAccionista.ciudad}" id="ciudadFilter">
+                        <h:outputText value="#{itemAccionista.ciudad}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AccionistaTitle_tituloEntregado}" filterBy="#{itemAccionista.tituloEntregado}"   
+                            filterOptions="#{accionistaController.tituloOptions}" filterMatchMode="exact" 
+                            sortBy="#{itemAccionista.tituloEntregado}" id="tituloEntregadoFilter">
+                        <h:outputText value="#{itemAccionista.tituloEntregado}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AccionistaTitle_cartaFirmada}" filterBy="#{itemAccionista.cartaFirmada}"
+                            filterOptions="#{accionistaController.tituloOptions}" filterMatchMode="exact" 
+                            sortBy="#{itemAccionista.cartaFirmada}" id="cartaFirmadaFilter">
+                        <h:outputText value="#{itemAccionista.cartaFirmada}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.AccionistaTitle_estado}" filterBy="#{itemAccionista.estado}"
+                            filterOptions="#{accionistaController.estadoOptions}" filterMatchMode="exact" 
+                            sortBy="#{itemAccionista.estado}" id="estadoFilter">
+                        <h:outputText value="#{itemAccionista.estado}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
+        </p:panel>
+    </h:form>
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditAccionista" resizable="false" modal="true"
+              showEffect="explode" hideEffect="explode">
+        <ui:include src="EditAccionista.xhtml"></ui:include>
+    </p:dialog>
+</html>

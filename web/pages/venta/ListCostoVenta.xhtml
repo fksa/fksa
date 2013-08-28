@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListCostoVenta" styleClass="jsfcrud_list_form">
+        <div style="text-align: right">
+            <p:commandButton id="addButtonCostoVenta" icon="ui-icon-plusthick"
+                             disabled="#{LoginController.validarPermisos}"
+                             action="#{ventaController.createCosto()}"
+                             title="#{bundle.CreateLink}"
+                             update=":formEditVenta:mensaje :formListVenta:listaVenta
+                                    :formEditVenta:tabVenta:panelEditVenta2
+                                    :formEditVenta:tabVenta:vlorCostos
+                                    :formEditVenta:tabVenta:formListCostoVenta:listaCostoVenta"  
+                             process="@this"/>    
+        </div>
+        <p:dataTable value="#{ventaController.selected.costoVentaList}" var="itemCostoVenta" id="listaCostoVenta"
+                     editable="true" paginator="true" rows="10">
+            <p:ajax event="rowEdit" listener="#{ventaController.saveCosto}"
+                    update=":formEditVenta:mensaje :formListVenta:listaVenta
+                           :formEditVenta:tabVenta:panelEditVenta2
+                           :formEditVenta:tabVenta:vlorCostos
+                           :formEditVenta:tabVenta:formListCostoVenta:listaCostoVenta"/>    
+            <p:ajax event="rowEditCancel" update=":formEditVenta:tabVenta:formListCostoVenta:listaCostoVenta" />  
+            <p:column headerText="#{bundle.CostoVentaTitle_idTipo}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemCostoVenta.idTipo.nombre}"/>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <h:selectOneMenu id="tipo" value="#{itemCostoVenta.idTipo}" title="#{bundle.CostoVentaTitle_idTipo}">
+                            <f:selectItems value="#{tipoCostoController.itemsAvailableSelectOne}"/>
+                        </h:selectOneMenu>
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.CostoVentaTitle_valorUnitario}" style="text-align: right">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemCostoVenta.valorUnitario}">
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemCostoVenta.valorUnitario}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.CostoVentaTitle_unidades}" style="text-align: right">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemCostoVenta.unidades}">
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemCostoVenta.unidades}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.CostoVentaTitle_valorTotal}" style="text-align: right">
+                <h:outputText value="#{itemCostoVenta.valorTotal}">
+                    <f:convertNumber integerOnly="true"/>
+                </h:outputText>
+            </p:column>
+            <p:column headerText="#{bundle.CostoVentaTitle_observaciones}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemCostoVenta.observaciones}">
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemCostoVenta.observaciones}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column style="width:6%">  
+                <p:rowEditor/>
+            </p:column>
+            <p:column style="width:6%" headerText="&nbsp;" >
+              <p:commandLink id="delButtonCosto" styleClass="ui-icon ui-icon-close"
+                             disabled="#{LoginController.validarPermisos}"
+                             action="#{ventaController.removeCosto(itemCostoVenta)}"
+                             title="#{bundle.DestroyLink}"
+                             update=":formEditVenta:mensaje :formListVenta:listaVenta
+                                    :formEditVenta:tabVenta:panelEditVenta2
+                                    :formEditVenta:tabVenta:vlorCostos
+                                    :formEditVenta:tabVenta:formListCostoVenta:listaCostoVenta"  
+                             process="@this"/>    
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</html>

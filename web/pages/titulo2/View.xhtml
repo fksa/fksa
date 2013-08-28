@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewTitulo">
+        <h:panelGrid id="panelViewTitulo" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.TituloLabel_id}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{tituloController.selected.id}" title="#{bundle.TituloTitle_id}"/>
+            <h:outputText value="#{bundle.TituloLabel_numeroAcciones}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{tituloController.selected.numeroAcciones}" title="#{bundle.TituloTitle_numeroAcciones}"/>
+            <h:outputText value="#{bundle.TituloLabel_tituloNumero}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{tituloController.selected.tituloNumero}" title="#{bundle.TituloTitle_tituloNumero}"/>
+            <h:outputText value="#{bundle.TituloLabel_idAccionista}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{tituloController.selected.idAccionista}" title="#{bundle.TituloTitle_idAccionista}"/>
+            <h:outputText value="#{bundle.TituloLabel_idSas}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{tituloController.selected.idSas}" title="#{bundle.TituloTitle_idSas}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

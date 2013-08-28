@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewUsuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form prependId="false">
+                <p:commandButton action="#{usuarioController.prepareList}" value="#{bundle.UsuarioShowAllLink}"
+                                 image="ui-icon ui-icon-arrowreturnthick-1-w" title="#{bundle.UsuarioShowAllLink}" ajax="false" immediate="true">
+                </p:commandButton>
+                <br/>
+                <br/>
+                <p:panel header="#{usuarioController.selected}">
+                    <br/>
+                    <p:commandButton image="ui-icon ui-icon-plusthick" style="margin-right:0px;" ajax="false" disabled="#{LoginController.validarPermisos}"
+                                     action="#{usuarioController.prepareCreate}" title="#{bundle.UsuarioCreateLink}" />
+                    <p:commandButton image="ui-icon ui-icon-pencil" style="margin-right:0px;" ajax="false" disabled="#{LoginController.validarPermisos}"
+                                     action="#{usuarioController.prepareEditForView}" title="#{bundle.UsuarioEditLink}" />
+                    <p:commandButton image="ui-icon ui-icon-closethick" style="margin-right:0px;" ajax="false" disabled="#{LoginController.validarPermisos}"
+                                     action="#{usuarioController.destroyAndView}" title="#{bundle.UsuarioDestroyLink}" />
+                    <br/>
+                    <br/>
+                    <h:panelGrid columns="3">
+                        <h:outputText value="#{bundle.UsuarioLabel_usuario}"/>
+                        <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+                        <h:outputText value="#{usuarioController.selected.usuario}" title="#{bundle.UsuarioTitle_usuario}"/>
+                        <h:outputText value="#{bundle.UsuarioLabel_nombre}"/>
+                        <h:outputText value="&nbsp;"/>
+                        <h:outputText value="#{usuarioController.selected.nombre}" title="#{bundle.UsuarioTitle_nombre}"/>
+                    </h:panelGrid>
+                    <br/>
+                    <br/>
+                    <p:dataTable id="perfiles" var="perfil" value="#{usuarioController.selected.perfilesUsuarioList}" paginator="true" rows="10" >  
+                        <f:facet name="header">#{bundle.ListPerfilTitle}</f:facet>  
+                        <p:column headerText="#{bundle.PerfilTitle_nombre}">
+                            <h:outputText value="#{perfil.perfil.nombre}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.PerfilTitle_descripcion}">
+                            <h:outputText value="#{perfil.perfil.descripcion}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

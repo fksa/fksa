@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewGrupoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form prependId="false">
+                <p:commandButton action="#{grupoController.prepareList}" value="#{bundle.GrupoShowAllLink}"
+                                 image="ui-icon ui-icon-arrowreturnthick-1-w" title="#{bundle.GrupoShowAllLink}" ajax="false" immediate="true">
+                </p:commandButton>
+                <br/>
+                <br/>
+                <p:panel header="#{grupoController.selected}">
+                    <br/>
+                    <p:commandButton image="ui-icon ui-icon-plusthick" style="margin-right:0px;" ajax="false" disabled="#{LoginController.validarPermisos}"
+                                     action="#{grupoController.prepareCreate}" title="#{bundle.GrupoCreateLink}" />
+                    <p:commandButton image="ui-icon ui-icon-pencil" style="margin-right:0px;" ajax="false" disabled="#{LoginController.validarPermisos}"
+                                     action="#{grupoController.prepareEditForView}" title="#{bundle.GrupoEditLink}" />
+                    <p:commandButton image="ui-icon ui-icon-closethick" style="margin-right:0px;" ajax="false" disabled="#{LoginController.validarPermisos}"
+                                     action="#{grupoController.destroyAndView}" title="#{bundle.GrupoDestroyLink}" />
+                    <br/>
+                    <br/>
+                    <h:panelGrid columns="3">
+                        <h:outputText value="#{bundle.GrupoLabel_nombre}"/>
+                        <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+                        <h:outputText value="#{grupoController.selected.nombre}" title="#{bundle.GrupoTitle_nombre}"/>
+                        <h:outputText value="#{bundle.GrupoLabel_descripcion}"/>
+                        <h:outputText value="&nbsp;"/>
+                        <h:outputText value="#{grupoController.selected.descripcion}" title="#{bundle.GrupoTitle_descripcion}"/>
+                    </h:panelGrid>
+                    <br/>
+                    <br/>
+                    <p:dataTable  id="modulos" var="modulo" value="#{grupoController.selected.modulosGrupoList}" paginator="true" rows="10" >  
+                        <f:facet name="header">#{bundle.ListModuloTitle}</f:facet>  
+                        <p:column headerText="#{bundle.ModuloTitle_nombre}">
+                            <h:outputText value="#{modulo.modulo.nombre}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.ModuloTitle_url}">
+                            <h:outputText value="#{modulo.modulo.url}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.ModuloTitle_permisos}">
+                            <h:outputText value="#{modulo.modulo.permisos}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.ModuloTitle_nombreGrupoModulo}">
+                            <h:outputText value="#{modulo.modulo.idGrupoModulo.nombre}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <br/>
+                    <br/>
+                    <p:dataTable  id="perfiles" var="perfil" value="#{grupoController.selected.gruposPerfilList}" paginator="true" rows="10" >  
+                        <f:facet name="header">#{bundle.ListPerfilTitle}</f:facet>  
+                        <p:column headerText="#{bundle.PerfilTitle_nombre}">
+                            <h:outputText value="#{perfil.perfil.nombre}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.PerfilTitle_descripcion}">
+                            <h:outputText value="#{perfil.perfil.descripcion}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

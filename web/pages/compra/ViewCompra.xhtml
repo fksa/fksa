@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:form id="formViewCompra">
+        <h:panelGrid id="panelViewCompra" columns="3" cellpadding="4">  
+            <h:outputText value="#{bundle.CompraLabel_idVendedor}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{compraController.selected.idVendedor.nombre}" title="#{bundle.CompraTitle_idVendedor}"/>
+            <h:outputText value="#{bundle.CompraLabel_fechaCompra}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{compraController.selected.fechaCompra}" title="#{bundle.CompraTitle_fechaCompra}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            <h:outputText value="#{bundle.CompraLabel_valor}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{compraController.selected.valor}" title="#{bundle.CompraTitle_valor}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.CompraLabel_saldo}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{compraController.selected.saldo}" title="#{bundle.CompraTitle_saldo}">
+                <f:convertNumber integerOnly="true"/>
+            </h:outputText>
+            <h:outputText value="#{bundle.CompraLabel_fechaSaldo}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:outputText value="#{compraController.selected.fechaSaldo}" title="#{bundle.CompraTitle_fechaSaldo}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:outputText>
+            <h:outputText value="#{bundle.CompraLabel_observaciones}"/>
+            <h:outputText value="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"/>
+            <h:inputTextarea disabled="true" cols="25" rows="4" value="#{compraController.selected.observaciones}" title="#{bundle.CompraTitle_observaciones}"/>
+        </h:panelGrid>
+    </h:form>
+</html>

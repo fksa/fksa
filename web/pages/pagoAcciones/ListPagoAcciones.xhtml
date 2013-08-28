@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListPagoAcciones" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <br/>
+            <div style="text-align: right">
+                <p:commandButton id="addButtonPagoAcciones" icon="ui-icon-plusthick"
+                                 disabled="#{LoginController.validarPermisos}"
+                                 action="#{pagoAccionesController.prepareCreate}"
+                                 title="#{bundle.CreateLink}"
+                                 update=":formEditPagoAcciones:panelEditPagoAcciones"
+                                 oncomplete="dialogEditPagoAcciones.show()" process="addButtonPagoAcciones"/>    
+            </div>
+            <h:outputText escape="false" value="#{bundle.Empty}" rendered="#{pagoAccionesController.items.rowCount == 0}"/>
+            <h:panelGroup rendered="#{pagoAccionesController.items.rowCount > 0}">
+                <p:contextMenu for="listaPagoAcciones">  
+                    <p:menuitem value="#{bundle.ViewLink}" update=":formViewPagoAcciones:panelViewPagoAcciones" icon="ui-icon-zoomin"
+                                oncomplete="dialogViewPagoAcciones.show()"/> 
+                    <p:menuitem value="#{bundle.EditLink}" update=":formEditPagoAcciones:panelEditPagoAcciones" icon="ui-icon-pencil"
+                                oncomplete="dialogEditPagoAcciones.show()" disabled="#{LoginController.validarPermisos}"/> 
+                    <p:menuitem value="#{bundle.DestroyLink}" update=":formListPagoAcciones:panelConfirmPagoAcciones" icon="ui-icon-closethick"
+                                oncomplete="confirmationPagoAcciones.show()" disabled="#{LoginController.validarPermisos}"/> 
+                </p:contextMenu>
+                <p:dataTable value="#{pagoAccionesController.items}" var="itemPagoAcciones" id="listaPagoAcciones" rowKey="#{itemPagoAcciones.id}" 
+                             selection="#{pagoAccionesController.selected}" selectionMode="single" paginator="true" rows="20" >
+                    <p:column headerText="#{bundle.PagoAccionesTitle_id}" filterBy="#{itemPagoAcciones.id}"
+                              sortBy="#{itemPagoAcciones.id}" id="idFilter">
+                        <h:outputText value="#{itemPagoAcciones.id}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.PagoAccionesTitle_fecha}" filterBy="#{itemPagoAcciones.fecha}"
+                              sortBy="#{itemPagoAcciones.fecha}" id="fechaFilter">
+                        <h:outputText value="#{itemPagoAcciones.fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </p:column>
+                    <p:column headerText="#{bundle.PagoAccionesTitle_numero}" filterBy="#{itemPagoAcciones.numero}"
+                              sortBy="#{itemPagoAcciones.numero}" id="numeroFilter">
+                        <h:outputText value="#{itemPagoAcciones.numero}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.PagoAccionesTitle_valor}" filterBy="#{itemPagoAcciones.valor}"
+                              sortBy="#{itemPagoAcciones.valor}" id="valorFilter">
+                        <h:outputText value="#{itemPagoAcciones.valor}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.PagoAccionesTitle_comisionBancaria}" filterBy="#{itemPagoAcciones.comisionBancaria}"
+                              sortBy="#{itemPagoAcciones.comisionBancaria}" id="comisionBancariaFilter">
+                        <h:outputText value="#{itemPagoAcciones.comisionBancaria}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.PagoAccionesTitle_valorNeto}" filterBy="#{itemPagoAcciones.valorNeto}"
+                              sortBy="#{itemPagoAcciones.valorNeto}" id="valorNetoFilter">
+                        <h:outputText value="#{itemPagoAcciones.valorNeto}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.PagoAccionesTitle_observaciones}" filterBy="#{itemPagoAcciones.observaciones}"
+                              sortBy="#{itemPagoAcciones.observaciones}" id="observacionesFilter">
+                        <h:outputText value="#{itemPagoAcciones.observaciones}"/>
+                    </p:column>
+                    <p:column headerText="#{bundle.PagoAccionesTitle_idAccionista}" filterBy="#{itemPagoAcciones.idAccionista}"
+                              sortBy="#{itemPagoAcciones.idAccionista}" id="idAccionistaFilter">
+                        <h:outputText value="#{itemPagoAcciones.idAccionista}"/>
+                    </p:column>
+                </p:dataTable>
+            </h:panelGroup>
+        </p:panel>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{pagoAccionesController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationPagoAcciones" id="panelConfirmPagoAcciones">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaPagoAcciones" oncomplete="confirmationPagoAcciones.hide()"
+                                 actionListener="#{pagoAccionesController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationPagoAcciones.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+    <p:dialog header="#{bundle.ViewTitle}" widgetVar="dialogViewPagoAcciones" resizable="false" modal="true" showEffect="clip" hideEffect="fold">
+        <ui:include src="ViewPagoAcciones.xhtml"></ui:include>
+    </p:dialog>  
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditPagoAcciones" resizable="false" modal="true" showEffect="explode" hideEffect="explode">
+        <ui:include src="EditPagoAcciones.xhtml"></ui:include>
+    </p:dialog>
+</html>

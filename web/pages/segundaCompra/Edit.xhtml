@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:form id="formEdit">
+        <p:panelGrid columns="2" id="panelEdit">
+            <h:outputLabel value="#{bundle.SegundaCompraLabel_fecha}" for="fecha" />
+            <h:inputText id="fecha" value="#{segundaCompraController.selected.fecha}" title="#{bundle.SegundaCompraTitle_fecha}" required="true" requiredMessage="#{bundle.SegundaCompraRequiredMessage_fecha}">
+                <f:convertDateTime pattern="MM/dd/yyyy" />
+            </h:inputText>
+            <h:outputLabel value="#{bundle.SegundaCompraLabel_numeroConsignacion}" for="numeroConsignacion" />
+            <h:inputText id="numeroConsignacion" value="#{segundaCompraController.selected.numeroConsignacion}" title="#{bundle.SegundaCompraTitle_numeroConsignacion}" />
+            <h:outputLabel value="#{bundle.SegundaCompraLabel_valor}" for="valor" />
+            <h:inputText id="valor" value="#{segundaCompraController.selected.valor}" title="#{bundle.SegundaCompraTitle_valor}" required="true" requiredMessage="#{bundle.SegundaCompraRequiredMessage_valor}"/>
+            <h:outputLabel value="#{bundle.SegundaCompraLabel_cuenta}" for="cuenta" />
+            <h:inputText id="cuenta" value="#{segundaCompraController.selected.cuenta}" title="#{bundle.SegundaCompraTitle_cuenta}" />
+            <h:outputLabel value="#{bundle.SegundaCompraLabel_descuentoBanco}" for="descuentoBanco" />
+            <h:inputText id="descuentoBanco" value="#{segundaCompraController.selected.descuentoBanco}" title="#{bundle.SegundaCompraTitle_descuentoBanco}" required="true" requiredMessage="#{bundle.SegundaCompraRequiredMessage_descuentoBanco}"/>
+            <h:outputLabel value="#{bundle.SegundaCompraLabel_idAccionista}" for="idAccionista" />
+            <h:selectOneMenu id="idAccionista" value="#{segundaCompraController.selected.idAccionista}" title="#{bundle.SegundaCompraTitle_idAccionista}" >
+                <f:selectItems value="#{accionistaController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+            <h:outputLabel value="#{bundle.SegundaCompraLabel_idSas}" for="idSas" />
+            <h:selectOneMenu id="idSas" value="#{segundaCompraController.selected.idSas}" title="#{bundle.SegundaCompraTitle_idSas}" >
+                <f:selectItems value="#{sasController.itemsAvailableSelectOne}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButton"
+                            actionListener="#{segundaCompraController.update}"
+                            value="#{bundle.SaveLink}"
+                            icon="ui-icon-disk"
+                            title="#{bundle.SaveLink}"
+                            oncomplete="dialogEdit.hide()"
+                            update=":formList:lista :formList:gro"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

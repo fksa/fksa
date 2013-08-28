@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListPagoCompraVenta" styleClass="jsfcrud_list_form">
+        <div style="text-align: right">
+            <p:commandButton id="addButtonPagoCompraVenta" icon="ui-icon-plus"
+                             disabled="#{LoginController.validarPermisos}"
+                             action="#{compraController.createPago()}"
+                             title="#{bundle.CreateLink}"
+                             update=":formEditCompra:mensaje :formListCompra:listaCompra
+                                        :formEditCompra:tabCompra:panelEditCompra2
+                                        :formEditCompra:tabCompra:vlorPagos
+                                        :formEditCompra:tabCompra:formListPagoCompraVenta:listaPagoCompraVenta"  
+                             process="@this"/>    
+        </div>
+        <p:dataTable value="#{compraController.selected.pagoCompraVentaList}" var="itemPagoCompraVenta" id="listaPagoCompraVenta"
+                     editable="true">
+            <p:ajax event="rowEdit" listener="#{compraController.savePago}"
+                             update=":formEditCompra:mensaje :formListCompra:listaCompra
+                                        :formEditCompra:tabCompra:panelEditCompra2
+                                        :formEditCompra:tabCompra:vlorPagos
+                                        :formEditCompra:tabCompra:formListPagoCompraVenta:listaPagoCompraVenta" />  
+            <p:ajax event="rowEditCancel" update=":formEditCompra:mensaje :formEditCompra:tabCompra:formListPagoCompraVenta:listaPagoCompraVenta"/>  
+            <p:column headerText="#{bundle.PagoAccionesTitle_fecha}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemPagoCompraVenta.fecha}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:calendar value="#{itemPagoCompraVenta.fecha}" id="popupCal" />  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.PagoCompraVentaTitle_valor}" style="text-align: right">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemPagoCompraVenta.valor}">
+                            <f:convertNumber integerOnly="true"/>
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemPagoCompraVenta.valor}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column headerText="#{bundle.PagoCompraVentaTitle_observaciones}">
+                <p:cellEditor>  
+                    <f:facet name="output">  
+                        <h:outputText value="#{itemPagoCompraVenta.observaciones}">
+                        </h:outputText>
+                    </f:facet>  
+                    <f:facet name="input">  
+                        <p:inputText value="#{itemPagoCompraVenta.observaciones}" style="width:100%"/>  
+                    </f:facet>  
+                </p:cellEditor>  
+            </p:column>
+            <p:column style="width:6%">  
+                <p:rowEditor/>
+            </p:column>
+            <p:column style="width:6%" headerText="&nbsp;" >
+              <p:commandLink id="delButtonPago" styleClass="ui-icon ui-icon-close"
+                             disabled="#{LoginController.validarPermisos}"
+                             action="#{compraController.removePago(itemPagoCompraVenta)}"
+                             title="#{bundle.DestroyLink}"
+                             update=":formEditCompra:mensaje :formListCompra:listaCompra
+                                        :formEditCompra:tabCompra:panelEditCompra2
+                                        :formEditCompra:tabCompra:vlorPagos
+                                        :formEditCompra:tabCompra:formListPagoCompraVenta:listaPagoCompraVenta"  
+                             process="@this"/>    
+            </p:column>
+        </p:dataTable>
+        <p:confirmDialog message="#{bundle.Confirmation_message} #{pagoCompraVentaController.selected}"
+                         header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationPagoCompraVenta" id="panelConfirmPagoCompraVenta">
+            <div style="text-align: center">
+                <p:commandButton value="#{bundle.Confirmation_aceptar}" update="listaPagoCompraVenta" oncomplete="confirmationPagoCompraVenta.hide()"
+                                 actionListener="#{pagoCompraVentaController.destroy}" ajax="false" async="false" />
+                <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationPagoCompraVenta.hide()" type="button" />
+            </div>
+        </p:confirmDialog>
+    </h:form>
+</html>

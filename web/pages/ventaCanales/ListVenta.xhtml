@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formListVenta" styleClass="jsfcrud_list_form">
+        <p:growl id="gro" showDetail="true"/>
+        <p:panel header="#{bundle.ListTitle}">
+            <p:contextMenu for="listaVenta">  
+                <p:menuitem value="#{bundle.EditLink}" update=":panelEditVenta" icon="ui-icon-pencil"
+                            oncomplete="dialogEditVenta.show()" disabled="#{LoginController.validarPermisos}"/> 
+                <p:menuitem value="Sacrificio: #{itemVenta.addSacrificio}" update=":panelEditVenta" icon="ui-icon-check"
+                            action="#{ventaCanalesController.createSacrificio}"  disabled="#{itemVenta.addSacrificio}"/> 
+            </p:contextMenu>
+            <p:dataTable value="#{ventaCanalesController.items}" var="itemVenta" id="listaVenta" 
+                         selection="#{ventaCanalesController.selected}" selectionMode="single" paginator="true" rows="20" >
+                <p:column headerText="#{bundle.VentaTitle_fechaVenta}"
+                          sortBy="#{itemVenta.fechaVenta}">
+                    <h:outputText value="#{itemVenta.fechaVenta}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_idComprador}"
+                          sortBy="#{itemVenta.idComprador.nombre}">
+                    <h:outputText value="#{itemVenta.idComprador.nombre}"/>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_tipo}"
+                          sortBy="#{itemVenta.tipo}">
+                    <h:outputText value="#{itemVenta.tipo}"/>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_totalVenta}"
+                          sortBy="#{itemVenta.totalVenta}">
+                    <h:outputText value="#{itemVenta.totalVenta}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_totalCosto}"
+                          sortBy="#{itemVenta.totalCosto}">
+                    <h:outputText value="#{itemVenta.totalCosto}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_utilidad}"
+                          sortBy="#{itemVenta.utilidad}">
+                    <h:outputText value="#{itemVenta.utilidad}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_saldo}"
+                          sortBy="#{itemVenta.saldo}" id="saldoFilter">
+                    <h:outputText value="#{itemVenta.saldo}">
+                        <f:convertNumber integerOnly="true"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="#{bundle.VentaTitle_fechaSaldo}"
+                          sortBy="#{itemVenta.fechaSaldo}">
+                    <h:outputText value="#{itemVenta.fechaSaldo}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                </p:column>
+            </p:dataTable>
+        </p:panel>
+    </h:form>
+    <p:dialog header="#{bundle.EditTitle}" widgetVar="dialogEditVenta" resizable="false" modal="true" showEffect="explode" hideEffect="explode" position="left top" draggable="false">
+        <ui:include src="EditVenta.xhtml"></ui:include>
+    </p:dialog>
+</html>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:form id="formEditVendedor">
+        <p:panelGrid columns="2" id="panelEditVendedor">
+            <h:outputLabel value="#{bundle.VendedorLabel_rut}" for="rut" />
+            <h:inputText id="rut" value="#{vendedorController.selected.rut}" title="#{bundle.VendedorTitle_rut}" required="true" requiredMessage="#{bundle.VendedorRequiredMessage_rut}"/>
+            <h:outputLabel value="#{bundle.VendedorLabel_nombre}" for="nombre" />
+            <h:inputText id="nombre" value="#{vendedorController.selected.nombre}" title="#{bundle.VendedorTitle_nombre}" required="true" requiredMessage="#{bundle.VendedorRequiredMessage_nombre}"/>
+            <h:outputLabel value="#{bundle.VendedorLabel_direccion}" for="direccion" />
+            <h:inputText id="direccion" value="#{vendedorController.selected.direccion}" title="#{bundle.VendedorTitle_direccion}" required="true" requiredMessage="#{bundle.VendedorRequiredMessage_direccion}"/>
+            <h:outputLabel value="#{bundle.VendedorLabel_ciudad}" for="ciudad" />
+            <h:inputText id="ciudad" value="#{vendedorController.selected.ciudad}" title="#{bundle.VendedorTitle_ciudad}" required="true" requiredMessage="#{bundle.VendedorRequiredMessage_ciudad}"/>
+            <h:outputLabel value="#{bundle.VendedorLabel_telefono}" for="telefono" />
+            <h:inputText id="telefono" value="#{vendedorController.selected.telefono}" title="#{bundle.VendedorTitle_telefono}" required="true" requiredMessage="#{bundle.VendedorRequiredMessage_telefono}"/>
+            <h:outputLabel value="#{bundle.VendedorLabel_soportes}" for="soportes" />
+            <h:selectOneMenu id="soportes" value="#{vendedorController.selected.soportes}" title="#{bundle.VendedorTitle_soportes}" required="true" requiredMessage="#{bundle.VendedorRequiredMessage_soportes}">
+                <f:selectItems value="#{accionistaController.tituloOptions}"/>
+            </h:selectOneMenu>
+            <h:outputLabel value="#{bundle.VendedorLabel_estado}" for="estado" />
+            <h:selectOneMenu id="estado" value="#{vendedorController.selected.estado}" title="#{bundle.VendedorTitle_estado}" required="true" requiredMessage="#{bundle.VendedorRequiredMessage_estado}">
+                <f:selectItems value="#{accionistaController.estadoOptions}"/>
+            </h:selectOneMenu>
+        </p:panelGrid>
+        <br/>
+        <div style="text-align: center">
+            <p:commandButton id="saveButtonVendedor" icon="ui-icon-disk" oncomplete="dialogEditVendedor.hide()" update=":formListVendedor:listaVendedor :formListVendedor:gro"
+                             actionListener="#{vendedorController.update}"
+                             value="#{bundle.SaveLink}"
+                             title="#{bundle.SaveLink}"/>
+        </div>
+        <br/>
+    </h:form>
+</html>

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditUsuarioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <p:panel header="#{usuarioController.selected}">
+                <h:form prependId="false">
+                    <p:commandButton value="#{bundle.UsuarioShowAllLink}" action="#{usuarioController.prepareList}"
+                                     image="ui-icon ui-icon-arrowreturnthick-1-w" title="#{bundle.UsuarioShowAllLink}" ajax="false" immediate="true">
+                    </p:commandButton>
+                    <br/>
+                    <br/>
+                    <h:panelGrid columns="2">
+                        <h:outputLabel value="#{bundle.UsuarioLabel_usuario}" for="usuario" />
+                        <h:inputText id="usuario" value="#{usuarioController.selected.usuario}" title="#{bundle.UsuarioTitle_usuario}"
+                                        disabled="true" />
+                        <h:outputLabel value="#{bundle.UsuarioLabel_nombre}" for="nombre" />
+                        <h:inputText id="nombre" value="#{usuarioController.selected.nombre}" title="#{bundle.UsuarioTitle_nombre}"
+                                        required="true" requiredMessage="#{bundle.UsuarioRequiredMessage_nombre}"/>
+                    </h:panelGrid>
+                    <p:commandButton disabled="#{LoginController.validarPermisos}" value="Cambiar Clave" image="ui-icon ui-icon-pencil" onclick="clave.show()" />
+                    <br />
+                    <br />
+                    <div style="text-align: right">
+                        <p:commandButton disabled="#{LoginController.validarPermisos}" title="Adicionar Perfiles" image="ui-icon ui-icon-plusthick" onclick="perfilesDisp.show()" />
+                    </div>
+                    <p:dataTable value="#{usuarioController.selected.perfilesUsuarioList}" var="item" id="Perfiles" paginator="true" rows="10">
+                        <f:facet name="header">#{bundle.ListPerfilTitle}</f:facet>  
+                        <p:column headerText="#{bundle.PerfilTitle_nombre}">
+                            <h:outputText value="#{item.perfil.nombre}"/>
+                        </p:column>
+                        <p:column headerText="#{bundle.PerfilTitle_descripcion}">
+                            <h:outputText value="#{item.perfil.descripcion}"/>
+                        </p:column>
+                        <p:column headerText="&nbsp;">
+                            <p:commandButton oncomplete="confirmationPerfil.show()" update="Perfiles" image="ui-icon ui-icon-closethick" title="#{bundle.ListPerfilDestroyLink}"
+                                            disabled="#{LoginController.validarPermisos}">
+                                <f:setPropertyActionListener value="#{item}" target="#{usuarioController.selectedPerfil}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+                    <br />
+                    <br />
+                    <p:commandButton value="#{bundle.EditUsuarioSaveLink}" action="#{usuarioController.update}"
+                                     image="ui-icon ui-icon-disk" title="#{bundle.EditUsuarioSaveLink}" ajax="false" />
+                    
+                    <p:dialog header="#{bundle.ListPerfilTitle}" widgetVar="perfilesDisp" height="480" width="640"
+                              showEffect="explode" hideEffect="explode" modal="true" resizable="false" >
+                        <div style="text-align: right">
+                            <p:commandButton value="Adicionar" update="Perfiles perfiles" image="ui-icon ui-icon-plusthick" title="Adicionar"
+                                             action="#{usuarioController.addPerfiles()}" oncomplete="perfilesDisp.hide()">
+                            </p:commandButton>
+                        </div>
+                        <br/>
+                        <p:dataTable  id="perfiles" var="perfil" value="#{usuarioController.itemsPerfil}" paginator="true" rows="10"  
+                                      selection="#{usuarioController.perfilesArray}">  
+                            <f:facet name="header">#{bundle.ListPerfilTitle}</f:facet>  
+                            <p:column selectionMode="multiple" />
+                            <p:column headerText="#{bundle.PerfilTitle_nombre}">
+                                <h:outputText value="#{perfil.nombre}"/>
+                            </p:column>
+                            <p:column headerText="#{bundle.PerfilTitle_descripcion}">
+                                <h:outputText value="#{perfil.descripcion}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:dialog>
+                    
+                    <p:dialog header="Nueva Clave" widgetVar="clave" width="240" height="100"
+                              showEffect="explode" hideEffect="explode" modal="true" resizable="false" >
+                        <div style="text-align: center">
+                            <br />
+                            <h:inputSecret id="pwd" value="#{usuarioController.selected.pwd}" title="#{bundle.UsuarioTitle_pwd}"/>
+                            <br />
+                            <br />
+                            <p:commandButton value="Aceptar" image="ui-icon ui-icon-pencil" ajax="false"
+                                             action="#{usuarioController.updatePwd()}" oncomplete="clave.hide()">
+                            </p:commandButton>
+                        </div>
+                    </p:dialog>
+
+                    <p:confirmDialog message="#{bundle.Confirmation_message}" hideEffect="explode" modal="true"
+                                    header="#{bundle.Confirmation_header}" severity="alert" widgetVar="confirmationPerfil">
+                        <div style="text-align: center">
+                        <p:commandButton value="#{bundle.Confirmation_aceptar}" update="Perfiles perfiles" oncomplete="confirmationPerfil.hide()"
+                                         actionListener="#{usuarioController.removePerfil()}" ajax="false" async="false" />
+                        <p:commandButton value="#{bundle.Confirmation_cancelar}" onclick="confirmationPerfil.hide()" type="button" />
+                        </div>
+                    </p:confirmDialog>
+                    
+                </h:form>
+            </p:panel>
+        </ui:define>
+    </ui:composition>
+
+</html>
